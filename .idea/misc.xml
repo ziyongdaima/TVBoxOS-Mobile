@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ASMSmaliIdeaPluginConfiguration">
     <asm skipDebug="true" skipFrames="true" skipCode="false" expandFrames="false" />
@@ -7,6 +8,29 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Git/q215613905/TVBoxOS/app/src/main/res/layout/item_list.xml" value="0.14266304347826086" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_bottom_container.xml" value="0.3140625" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_gradient_black_b2t.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_progressbar.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_top_container.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/img_loading_placeholder.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/play_progress_horizontal.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek_thumb.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek_thumb_normal.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek_thumb_press.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_progressbar_bg.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_user_focus.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_detail.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_play.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_all_series.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_all_series_with_group.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_grid.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_home_sort.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_list.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_series.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_series_flag.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/player_live_control_view.xml" value="0.26358695652173914" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/player_vod_control_view.xml" value="0.2947916666666667" />
         <entry key="..\:/project/a_my/android/TVBoxOS/app/src/main/res/layout/activity_movie_folders.xml" value="0.26790571169537625" />
         <entry key="..\:/tvbox/TVBoxOS/app/src/main/layout/activity_detail.xml" value="0.16893115942028986" />
         <entry key="..\:/tvbox/TVBoxOS/app/src/main/layout/activity_live_play.xml" value="0.1" />
@@ -51,7 +75,7 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 33 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

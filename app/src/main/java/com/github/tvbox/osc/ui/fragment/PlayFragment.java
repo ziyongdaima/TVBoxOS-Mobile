@@ -356,13 +356,15 @@ public class PlayFragment extends BaseLazyFragment {
      */
     public void changedLandscape(boolean fullWindows) {
         mFullWindows = fullWindows;
+        LOG.i("fullWindows: " + fullWindows);
         if (fullWindows){
             int[] size = mVideoView.getVideoSize();
             int width = size[0];
             int height = size[1];
-            if (width>height){//根据视频尺寸判断是否横屏,小视频则只在activity改了预览尺寸(全屏预览)
+            if (width>=height){//根据视频尺寸判断是否横屏,小视频则只在activity改了预览尺寸(全屏预览)
                 //横屏(传感器)
                 mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                LOG.i("横屏 " + width + " " + height);
             }
 
             ImmersionBar.with(mActivity)
@@ -371,7 +373,7 @@ public class PlayFragment extends BaseLazyFragment {
                     .fitsSystemWindows(false)
                     .init();
         }else {//非全屏统一设置竖屏,activity处理为小的预览尺寸
-            mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            mActivity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 
             ImmersionBar.with(mActivity)
                     .hideBar(BarHide.FLAG_SHOW_BAR)

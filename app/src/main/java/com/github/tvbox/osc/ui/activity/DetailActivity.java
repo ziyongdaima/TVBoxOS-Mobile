@@ -28,6 +28,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import androidx.recyclerview.widget.RecyclerView;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NotificationUtils;
@@ -156,10 +157,10 @@ public class DetailActivity extends BaseVbActivity<ActivityDetailBinding> {
         mBinding.previewPlayerPlace.setVisibility(showPreview ? View.VISIBLE : View.GONE);
 
         mBinding.mGridView.setHasFixedSize(true);
-        mBinding.mGridView.setLayoutManager(new V7LinearLayoutManager(this.mContext,0,false));
+        mBinding.mGridView.setLayoutManager(new V7LinearLayoutManager(this.mContext,RecyclerView.VERTICAL,false));
         mBinding.mGridView.addItemDecoration(new LinearSpacingItemDecoration(20,false));
 
-        seriesAdapter = new SeriesAdapter(false);
+        seriesAdapter = new SeriesAdapter(true);
         mBinding.mGridView.setAdapter(seriesAdapter);
         mBinding.mGridViewFlag.setHasFixedSize(true);
         mBinding.mGridViewFlag.setLayoutManager(new V7LinearLayoutManager(this.mContext, 0, false));

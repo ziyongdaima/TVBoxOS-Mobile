@@ -7,9 +7,9 @@
     <!--CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
     <color name="colorAccent">#2e405c</color>
     <!--    默认window窗口(activity)背景颜色-->
-    <color name="windowBackground">#fff</color>
+    <color name="windowBackground">#E3E3E3</color>
 
-    <color name="bg_gray">#f7f7f7</color>
+    <color name="bg_gray">#E4808080</color>
     <color name="gray_darker">#7f7b79</color>
     <!--    深灰点击透明度-->
     <color name="gray_darker_press_alpha">#3C808080</color>
@@ -40,7 +40,9 @@
     <color name="color_3700B3">#3700B3</color>
     <color name="color_03DAC5">#03DAC5</color>
     <color name="title_fouse_n">#ffce7900</color>
+    <color name="color_CC006ED6">#CC006ED6</color>
     <color name="color_1890FF">#1890FF</color>
+    <color name="color_801890FF">#801890FF</color>
     <color name="color_FFB800">#FF6600</color>
     <color name="color_00FF0A">#00FF0A</color>
     <color name="color_CBF46A">#CBF46A</color>
