@@ -5,7 +5,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId 'com.github.tvbox.osc'
+        applicationId 'com.github.tvbox.osc.m'
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 22
@@ -27,6 +27,7 @@ android {
         variant.outputs.all { output ->
             outputFileName = rootProject.getName() + '_v' + variant.versionName + '_' + variant.buildType.name
             if (variant.buildType.name == buildTypes.release.getName()) {
+//                output.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/Release")
                 outputFileName += '_' + new Date().format("yyyyMMdd")
             }
             outputFileName += '.apk'

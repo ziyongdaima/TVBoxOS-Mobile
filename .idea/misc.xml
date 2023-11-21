@@ -10,8 +10,13 @@
         <entry key="..\:/Git/q215613905/TVBoxOS/app/src/main/res/layout/item_list.xml" value="0.14266304347826086" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_bottom_container.xml" value="0.3140625" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_gradient_black_b2t.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_large_round_gray.xml" value="0.3151041666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_progressbar.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_r_25_stroke_primary.xml" value="0.29739583333333336" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bg_top_container.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/bottom_navigation_item_selector.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/button_primary_r25.xml" value="0.29739583333333336" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/button_red_mask.xml" value="0.29635416666666664" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/img_loading_placeholder.xml" value="0.29739583333333336" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/play_progress_horizontal.xml" value="0.3151041666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek.xml" value="0.3151041666666667" />
@@ -20,17 +25,33 @@
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_player_control_vod_seek_thumb_press.xml" value="0.3151041666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_progressbar_bg.xml" value="0.29739583333333336" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/drawable/shape_user_focus.xml" value="0.3151041666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_collect.xml" value="0.27708333333333335" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_detail.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_main.xml" value="0.27708333333333335" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_play.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/activity_search.xml" value="0.2947916666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_all_series.xml" value="0.2947916666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_all_series_with_group.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_cast.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_grid_filter.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/dialog_tmdb_vod_info.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/fragment_model.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/fragment_my.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/fragment_user.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_dialog_select.xml" value="0.27708333333333335" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_folder.xml" value="0.2947916666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_grid.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_grid_filter.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_grid_filter_value.xml" value="0.2947916666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_home_sort.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_keyboard.xml" value="0.27708333333333335" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_list.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_search.xml" value="0.27708333333333335" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_series.xml" value="0.2947916666666667" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/item_series_flag.xml" value="0.27708333333333335" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/player_live_control_view.xml" value="0.26358695652173914" />
         <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/layout/player_vod_control_view.xml" value="0.2947916666666667" />
+        <entry key="..\:/Github_Project/TVBoxOS-Mobile/app/src/main/res/menu/main_bottom_navigation.xml" value="0.29583333333333334" />
         <entry key="..\:/project/a_my/android/TVBoxOS/app/src/main/res/layout/activity_movie_folders.xml" value="0.26790571169537625" />
         <entry key="..\:/tvbox/TVBoxOS/app/src/main/layout/activity_detail.xml" value="0.16893115942028986" />
         <entry key="..\:/tvbox/TVBoxOS/app/src/main/layout/activity_live_play.xml" value="0.1" />
@@ -75,6 +96,9 @@
     </option>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$" />
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android API 33 Platform" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

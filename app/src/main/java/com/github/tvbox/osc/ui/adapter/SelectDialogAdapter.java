@@ -85,11 +85,11 @@ public class SelectDialogAdapter<T> extends ListAdapter<T, SelectDialogAdapter.S
         String name = dialogInterface.getDisplay(value);
         TextView view = holder.itemView.findViewById(R.id.tvName);
         if (position == select) {
-            view.setTextColor(Color.WHITE);
+            // view.setTextColor(Color.WHITE);
             view.setBackground(view.getContext().getDrawable(R.drawable.button_primary_r25));
         }else {
             view.setBackground(view.getContext().getDrawable(R.drawable.bg_r_25_stroke_primary));
-            view.setTextColor(ColorUtils.getColor(R.color.colorPrimary));
+            // view.setTextColor(ColorUtils.getColor(R.color.colorPrimary));
         }
         view.setText(name);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
