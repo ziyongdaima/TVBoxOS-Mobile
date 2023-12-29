@@ -72,15 +72,6 @@
         android:text="逛逛网站"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_search_subs2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cornerRadius="20dp"
-        android:textColor="@color/text_gray"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:text="逛逛开源社区 (需魔法)"/>
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
