@@ -43,12 +43,7 @@ public class SubsTipDialog extends BottomPopupView {
             dismiss();
         });
         binding.btnSearchSubs1.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.lige.fit/tvbox"));
-            getContext().startActivity(intent);
-        });
-
-        binding.btnSearchSubs2.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/gaotianliuyun/gao"));
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://jxjson.cf/"));
             getContext().startActivity(intent);
         });
     }
