@@ -51,6 +51,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:text="发布地址"
+        android:textColor="@color/text_gray"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="https://jxjson.cf/"
+        android:textIsSelectable="true"
+        android:layout_marginTop="4dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="项目地址"
         android:textColor="@color/text_gray"
         />
