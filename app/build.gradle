@@ -1,13 +1,17 @@
-apply plugin: 'com.android.application'
-apply plugin: 'org.jetbrains.kotlin.android'
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
 
+    namespace 'com.github.tvbox.osc'
     defaultConfig {
         applicationId 'com.github.tvbox.osc'
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 31
         versionName '1.1.1'
         multiDexEnabled true
@@ -38,26 +42,22 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-    }
-
     signingConfigs {
-        config {
-            keyAlias 'TVBoxOSC'
-            keyPassword 'TVBoxOSC'
-            storeFile file('..\\TVBoxOSC.jks')
-            storePassword 'TVBoxOSC'
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
         }
     }
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.debug
         }
 
         release {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.debug
             minifyEnabled false
         }
     }
@@ -67,51 +67,53 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    lint {
         checkReleaseBuilds false
         abortOnError false
     }
-    dexOptions {
-        javaMaxHeapSize "4g"
-        additionalParameters += '--multi-dex'
-        additionalParameters += '--set-max-idx-number=48000'
-        additionalParameters += '--minimal-main-dex'
-    }
+    // dexOptions已废弃，Android Gradle Plugin会自动优化dexing过程
     buildFeatures {
         viewBinding true
     }
 
-    packagingOptions {//引入dlna-cast时的文件冲突
-        exclude 'META-INF/beans.xml'
+    packagingOptions {
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/beans.xml']
+        }
     }
 }
 
 dependencies {
     api fileTree(dir: "libs", include: ['*.jar', '*.aar'])
 
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.11.0'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.31"
-    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.12.0'
 
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation 'com.google.zxing:core:3.4.1'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation files('libs/thunder.jar')
     implementation files('libs/commons-lang3-3.12.0.jar')
     implementation 'org.conscrypt:conscrypt-android:2.5.2'
 
-    implementation 'com.squareup.okhttp3:okhttp:3.12.11'
-    annotationProcessor 'androidx.room:room-compiler:2.3.0'
-    implementation 'androidx.room:room-runtime:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.13'
+    kapt 'androidx.room:room-compiler:2.6.1'
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-ktx:2.6.1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.squareup.okio:okio:2.8.0'
+    implementation 'com.squareup.okio:okio:3.7.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45-androidx'
     implementation 'com.kingja.loadsir:loadsir:1.3.8'
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation('com.thoughtworks.xstream:xstream:1.4.15') {
@@ -146,11 +148,10 @@ dependencies {
     implementation 'com.github.lihangleo2:ShadowLayout:3.3.3'
     //glide图片加载
     implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
-    //tab标题栏
-    implementation project(":TabLayout")
-    implementation project(':ViewPager1Delegate')
+    //使用官方TabLayout和ViewPager2替代自定义TabLayout
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     //TabLayout的非kt项目需要依赖这个包实现点击事件等
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //展开收缩tv
@@ -163,6 +164,8 @@ dependencies {
     implementation project(":crash")
     //dlna投屏
     implementation 'com.github.devin1014.DLNA-Cast:dlna-dmc:V1.0.0'
-    // Lifecycles only (without ViewModel or LiveData)
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    // Lifecycles
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.7.0"
 }

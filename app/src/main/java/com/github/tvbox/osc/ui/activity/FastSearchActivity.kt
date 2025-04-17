@@ -12,7 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.angcyo.tablayout.DslTabLayout
+import com.github.tvbox.osc.ui.adapter.SearchWordAdapter
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.LogUtils
@@ -69,6 +69,7 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
     private lateinit var sourceViewModel : SourceViewModel
     private var searchAdapter = FastSearchAdapter()
     private var searchAdapterFilter = FastSearchAdapter()
+    private var searchWordAdapter = SearchWordAdapter()
     private var searchTitle: String? = ""
     private var spNames = HashMap<String, String>()
     private var isFilterMode = false
@@ -113,11 +114,14 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
         mBinding.ivSearch.setOnClickListener {
             search(mBinding.etSearch.text.toString())
         }
-        mBinding.tabLayout.configTabLayoutConfig {
-            onSelectViewChange  = { _, selectViewList, _, _ ->
-                    val tvItem: TextView = selectViewList.first() as TextView
-                    filterResult(tvItem.text.toString())
-                }
+        // 初始化垂直标签列表
+        mBinding.rvSearchWord.layoutManager = LinearLayoutManager(this)
+        mBinding.rvSearchWord.adapter = searchWordAdapter
+        searchWordAdapter.setOnItemClickListener { _, view, position ->
+            FastClickCheckUtil.check(view)
+            searchWordAdapter.setSelectedPosition(position)
+            val word = searchWordAdapter.data[position]
+            filterResult(word)
         }
         mBinding.mGridView.setHasFixedSize(true)
         mBinding.mGridView.setLayoutManager(LinearLayoutManager(this))
@@ -134,10 +138,10 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
             } catch (th: Throwable) {
                 th.printStackTrace()
             }
+            // 跳转到搜索详情页面
             val bundle = Bundle()
-            bundle.putString("id", video.id)
-            bundle.putString("sourceKey", video.sourceKey)
-            jumpActivity(DetailActivity::class.java, bundle)
+            bundle.putString("title", video.name)
+            jumpActivity(SearchDetailActivity::class.java, bundle)
         }
         mBinding.mGridViewFilter.setLayoutManager(LinearLayoutManager(this))
 
@@ -155,10 +159,10 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
                 } catch (th: Throwable) {
                     th.printStackTrace()
                 }
+                // 跳转到搜索详情页面
                 val bundle = Bundle()
-                bundle.putString("id", video.id)
-                bundle.putString("sourceKey", video.sourceKey)
-                jumpActivity(DetailActivity::class.java, bundle)
+                bundle.putString("title", video.name)
+                jumpActivity(SearchDetailActivity::class.java, bundle)
             }
         }
 
@@ -206,7 +210,7 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
         if (key.isNullOrEmpty()) return
         if (searchFilterKey === key) return
         searchFilterKey = key
-        val list: List<Movie.Video> = (resultVods[key])!!
+        val list: List<Movie.Video> = (resultVods[key]) ?: return
         searchAdapterFilter.setNewData(list)
     }
 
@@ -433,22 +437,16 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
         searchFilterKey = ""
         isFilterMode = false
         spNames.clear()
-        mBinding.tabLayout.removeAllViews()
+        searchWordAdapter.setNewData(ArrayList())
         searchResult()
     }
 
     private var searchExecutorService: ExecutorService? = null
     private val allRunCount = AtomicInteger(0)
-    private fun getSiteTextView(text: String): TextView {
-        val textView = TextView(this)
-        textView.text = text
-        textView.gravity = Gravity.CENTER
-        val params = DslTabLayout.LayoutParams(-2, -2)
-        params.topMargin = 20
-        params.bottomMargin = 20
-        textView.setPadding(20, 10, 20, 10)
-        textView.layoutParams = params
-        return textView
+    private fun addWordForText(text: String) {
+        val words = searchWordAdapter.data
+        words.add(text)
+        searchWordAdapter.setNewData(words)
     }
 
     private fun searchResult() {
@@ -472,8 +470,9 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
         searchRequestList.remove(home)
         searchRequestList.add(0, home)
         val siteKey = ArrayList<String>()
-        mBinding.tabLayout.addView(getSiteTextView("全部显示"))
-        mBinding.tabLayout.setCurrentItem(0, true, false)
+        val wordList = ArrayList<String>()
+        wordList.add("全部显示")
+        searchWordAdapter.setNewData(wordList)
         for (bean: SourceBean in searchRequestList) {
             if (!bean.isSearchable) {
                 continue
@@ -509,13 +508,13 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
                 }
             }
             if ((name == "")) return key
-            for (i in 0 until mBinding.tabLayout.childCount) {
-                val item = mBinding.tabLayout.getChildAt(i) as TextView
-                if ((name == item.text.toString())) {
+            // 使用垂直标签列表
+            for (word in searchWordAdapter.data) {
+                if (word == name) {
                     return key
                 }
             }
-            mBinding.tabLayout.addView(getSiteTextView(name))
+            addWordForText(name)
             return key
         } catch (e: Exception) {
             return key

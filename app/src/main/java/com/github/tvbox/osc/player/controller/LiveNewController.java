@@ -30,7 +30,7 @@ public class LiveNewController extends BaseController {
     @Override
     protected void initView() {
         super.initView();
-        mLoading = findViewById(R.id.loading);
+        mLoading = findViewById(R.id.play_loading);
     }
 
     public interface LiveControlListener {

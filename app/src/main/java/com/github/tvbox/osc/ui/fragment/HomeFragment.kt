@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
-import com.angcyo.tablayout.delegate.ViewPager1Delegate.Companion.install
+import com.google.android.material.tabs.TabLayoutMediator
 import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -54,7 +54,7 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
      * 提供给主页返回操作
      */
     val tabIndex: Int
-        get() = mBinding.tabLayout.currentItemIndex
+        get() = mBinding.tabLayout.selectedTabPosition
 
     /**
      * 提供给主页返回操作
@@ -262,10 +262,9 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
 
     private fun initViewPager(absXml: AbsSortXml?) {
         if (mSortDataList.isNotEmpty()) {
-            mBinding.tabLayout.removeAllViews()
+            mBinding.tabLayout.removeAllTabs()
             fragments.clear()
             for (data in mSortDataList) {
-                mBinding.tabLayout.addView(getTabTextView(data.name))
                 if (data.id == "my0") { //tab是主页,添加主页fragment 根据设置项显示豆瓣热门/站点推荐(每个源不一样)/历史记录
                     if (Hawk.get(
                             HawkConfig.HOME_REC,
@@ -279,25 +278,29 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
                 } else { //来自源的分类
                     fragments.add(GridFragment.newInstance(data))
                 }
+                // 不需要手动添加Tab，TabLayoutMediator会处理
             }
             if (Hawk.get(HawkConfig.HOME_REC, 0) == 2) { //关闭主页
-                mBinding.tabLayout.removeViewAt(0)
                 fragments.removeAt(0)
+                mBinding.tabLayout.removeAllTabs()
+                // 不需要手动添加Tab，TabLayoutMediator会处理
             }
 
-            //重新渲染vp
-            mBinding.mViewPager.adapter =
-                object : FragmentStatePagerAdapter(getChildFragmentManager()) {
-                    override fun getItem(position: Int): Fragment {
-                        return fragments[position]
-                    }
-
-                    override fun getCount(): Int {
-                        return fragments.size
-                    }
+            //使用ViewPager2的适配器
+            mBinding.mViewPager.adapter = object : androidx.viewpager2.adapter.FragmentStateAdapter(this) {
+                override fun getItemCount(): Int {
+                    return fragments.size
                 }
-            //tab和vp绑定
-            install(mBinding.mViewPager, mBinding.tabLayout, true)
+
+                override fun createFragment(position: Int): Fragment {
+                    return fragments[position]
+                }
+            }
+
+            //设置ViewPager2和TabLayout的联动
+            TabLayoutMediator(mBinding.tabLayout, mBinding.mViewPager) { tab, position ->
+                tab.text = mSortDataList[position].name
+            }.attach()
         }
     }
 
@@ -305,7 +308,7 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
      * 提供给主页返回操作
      */
     fun scrollToFirstTab(): Boolean {
-        return if (mBinding.tabLayout.currentItemIndex != 0) {
+        return if (mBinding.tabLayout.selectedTabPosition != 0) {
             mBinding.mViewPager.setCurrentItem(0, false)
             true
         } else {

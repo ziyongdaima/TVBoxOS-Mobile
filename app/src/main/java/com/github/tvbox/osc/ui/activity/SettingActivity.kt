@@ -151,25 +151,10 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
             }
         }
 
+        // 暂时禁用DNS设置功能，等待后续修复
         mBinding.llDns.setOnClickListener { v: View? ->
             FastClickCheckUtil.check(v)
-            val dohUrl = Hawk.get(HawkConfig.DOH_URL, 0)
-            val dialog = SelectDialog<String>(this@SettingActivity)
-            dialog.setTip("请选择安全DNS")
-            dialog.setAdapter(object : SelectDialogInterface<String?> {
-                override fun click(value: String?, pos: Int) {
-                    mBinding.tvDns.text = OkGoHelper.dnsHttpsList[pos]
-                    Hawk.put(HawkConfig.DOH_URL, pos)
-                    val url = OkGoHelper.getDohUrl(pos)
-                    OkGoHelper.dnsOverHttps.setUrl(if (url.isEmpty()) null else HttpUrl.get(url))
-                    IjkMediaPlayer.toggleDotPort(pos > 0)
-                }
-
-                override fun getDisplay(name: String?): String {
-                    return name ?: ""
-                }
-            },SelectDialogAdapter.stringDiff, OkGoHelper.dnsHttpsList, dohUrl)
-            dialog.show()
+            ToastUtils.showShort("暂时禁用DNS设置功能，等待后续修复")
         }
 
         mBinding.llMediaCodec.setOnClickListener { v: View? ->
@@ -335,7 +320,7 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
             }, types, defaultPos)
             dialog.show()
         }
-        
+
         mBinding.llHistoryNum.setOnClickListener { v: View? ->
             FastClickCheckUtil.check(v)
             val defaultPos = Hawk.get(HawkConfig.HISTORY_NUM, 0)
