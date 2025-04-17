@@ -12,8 +12,13 @@
         android:layout_height="60dp"
         app:title="历史记录"
         app:leftTitleSize="16sp"
-        app:rightIcon="@drawable/ic_clear"
-        app:lineVisible="false"/>
+        app:rightIcon="@drawable/ic_clear_m3"
+        app:lineVisible="false"
+        android:background="?attr/colorSurface"
+        app:leftIcon="@drawable/ic_arrow_back_m3"
+        app:titleColor="?attr/colorOnSurface"
+        app:rightTitleColor="?attr/colorOnSurface"
+        app:leftTitleColor="?attr/colorOnSurface"/>
 
     <TextView
         android:id="@+id/top_tip"

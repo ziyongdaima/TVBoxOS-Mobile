@@ -12,7 +12,11 @@
         android:layout_height="45dp"
         app:title="设置"
         app:titleStyle="bold"
-        app:titleColor="@color/black"
+        android:background="?attr/colorSurface"
+        app:leftIcon="@drawable/ic_arrow_back_m3"
+        app:titleColor="?attr/colorOnSurface"
+        app:rightTitleColor="?attr/colorOnSurface"
+        app:leftTitleColor="?attr/colorOnSurface"
         app:lineVisible="false"/>
 
     <ScrollView

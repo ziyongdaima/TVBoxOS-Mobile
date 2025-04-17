@@ -11,6 +11,11 @@
         app:title="本地视频"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:background="?attr/colorSurface"
+        app:leftIcon="@drawable/ic_arrow_back_m3"
+        app:titleColor="?attr/colorOnSurface"
+        app:rightTitleColor="?attr/colorOnSurface"
+        app:leftTitleColor="?attr/colorOnSurface"
         />
 
     <androidx.recyclerview.widget.RecyclerView

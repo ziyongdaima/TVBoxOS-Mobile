@@ -13,17 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="订阅管理"
-        app:rightIcon="@drawable/ic_add_24"
+        app:rightIcon="@drawable/ic_add_m3"
+        android:background="?attr/colorSurface"
+        app:leftIcon="@drawable/ic_arrow_back_m3"
+        app:titleColor="?attr/colorOnSurface"
+        app:rightTitleColor="?attr/colorOnSurface"
+        app:leftTitleColor="?attr/colorOnSurface"
         >
 
         <ImageView
             android:id="@+id/iv_use_tip"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:src="@drawable/ic_use_description_24"
+            android:src="@drawable/ic_info_m3"
             android:layout_gravity="end|center_vertical"
             android:paddingLeft="20dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginRight="50dp"
+            app:tint="?attr/colorOnSurface"/>
     </com.hjq.bar.TitleBar>
 
     <androidx.recyclerview.widget.RecyclerView
