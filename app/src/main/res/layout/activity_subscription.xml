@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     tools:context=".ui.activity.SubscriptionActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
     <com.hjq.bar.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="订阅管理"
-        app:rightIcon="@drawable/ic_add_m3"
         android:background="?attr/colorSurface"
         app:leftIcon="@drawable/ic_arrow_back_m3"
         app:titleColor="?attr/colorOnSurface"
-        app:rightTitleColor="?attr/colorOnSurface"
         app:leftTitleColor="?attr/colorOnSurface"
+        app:lineVisible="false"
         >
 
         <ImageView
@@ -28,16 +31,28 @@
             android:src="@drawable/ic_info_m3"
             android:layout_gravity="end|center_vertical"
             android:paddingLeft="20dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="16dp"
             app:tint="?attr/colorOnSurface"/>
     </com.hjq.bar.TitleBar>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@drawable/bg_large_round_gray"
+        android:background="@drawable/bg_large_round_transparent"
         android:layout_margin="10dp"
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_subscription"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-</LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="添加订阅"
+        app:srcCompat="@drawable/ic_add_m3"
+        app:tint="?attr/colorOnPrimary"
+        app:backgroundTint="?attr/colorPrimary"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

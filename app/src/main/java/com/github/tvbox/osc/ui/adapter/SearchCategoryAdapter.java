@@ -25,10 +25,10 @@ public class SearchCategoryAdapter extends BaseQuickAdapter<SearchCategoryBean, 
         tvCategory.setText(item.getName());
 
         if (item.isSelected()) {
-            tvCategory.setTextColor(Color.WHITE); // 选中状态颜色
+            tvCategory.setTextColor(helper.itemView.getContext().getResources().getColor(R.color.md3_on_primary, null)); // 选中状态颜色
             helper.itemView.setBackgroundResource(R.drawable.shape_setting_sort_focus);
         } else {
-            tvCategory.setTextColor(Color.parseColor("#CCCCCC")); // 未选中状态颜色
+            tvCategory.setTextColor(helper.itemView.getContext().getResources().getColor(R.color.md3_on_surface_variant, null)); // 未选中状态颜色
             helper.itemView.setBackgroundResource(R.drawable.shape_setting_sort_normal);
         }
     }

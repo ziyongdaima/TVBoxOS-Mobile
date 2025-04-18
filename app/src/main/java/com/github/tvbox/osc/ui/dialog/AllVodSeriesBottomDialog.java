@@ -35,13 +35,15 @@ public class AllVodSeriesBottomDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_all_series;
+        return R.layout.dialog_all_series_m3;
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
         RecyclerView rv = findViewById(R.id.rv);
+
+
 
         rv.setLayoutManager(new GridLayoutManager(getContext(), Utils.getSeriesSpanCount(mList)));
         rv.addItemDecoration(new GridSpacingItemDecoration(Utils.getSeriesSpanCount(mList), 20, true));
@@ -51,9 +53,13 @@ public class AllVodSeriesBottomDialog extends BottomPopupView {
         rv.setAdapter(seriesAdapter);
 
         rv.postDelayed(() -> {//xpopup重写maxHeight后布局完成未滑动完毕导致定位异常,加延时可正常滑动
-            for (int i = 0; i < mList.size(); i++) {
-                if (mList.get(i).selected){
-                    rv.smoothScrollToPosition(i);
+            // 确保适配器已经设置并且有数据
+            if (rv.getAdapter() != null && rv.getAdapter().getItemCount() > 0) {
+                for (int i = 0; i < mList.size(); i++) {
+                    if (mList.get(i).selected && i < rv.getAdapter().getItemCount()){
+                        rv.smoothScrollToPosition(i);
+                        break; // 找到选中项后就跳出循环
+                    }
                 }
             }
         },500);

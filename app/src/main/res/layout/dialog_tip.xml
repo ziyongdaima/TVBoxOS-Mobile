@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/bg_bottom_dialog"
+        android:background="@drawable/bg_dialog_m3"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -22,8 +22,8 @@
             app:leftTitle="提示"
             app:leftTitleStyle="bold"
             app:leftTitleSize="16sp"
-            app:leftTitleColor="@color/text_foreground"
-            app:titleColor="@color/text_foreground"
+            app:leftTitleColor="?attr/colorOnSurface"
+            app:titleColor="?attr/colorOnSurface"
             app:rightTitle="切换订阅"
             app:rightTitleColor="@color/colorPrimary">
 
@@ -39,37 +39,24 @@
             android:lineSpacingExtra="30dp"
             android:lineSpacingMultiplier="0"
             android:textAlignment="gravity"
-            android:textColor="@color/text_foreground"
+            android:textColor="?attr/colorOnSurface"
             tools:text="解析失败解析失败解析失败解析失败解析失败解析失败解析失败解析失败" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="24dp"
+            android:gravity="center">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/leftBtn"
-                style="@style/mbOutline"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="33dp"
-                android:layout_marginRight="20dp"
-                android:text="重 试"
-                app:strokeColor="@color/colorPrimary"
-                />
+                style="@style/Widget.App.Dialog.Button.Confirm"
+                android:text="重试" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/rightBtn"
-                style="@style/mbOutline"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:layout_height="33dp"
-                android:textColor="@color/text_sub_foreground"
-                app:strokeColor="@color/text_sub_foreground"
-                android:text="取 消"/>
-
+                style="@style/Widget.App.Dialog.Button.Cancel"
+                android:text="取消" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

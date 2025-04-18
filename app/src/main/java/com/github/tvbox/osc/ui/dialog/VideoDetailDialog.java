@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.blankj.utilcode.util.ClipboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.github.tvbox.osc.util.MD3ToastUtils;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.bean.VodInfo;
 import com.github.tvbox.osc.databinding.DialogVideoDetailBinding;
@@ -62,7 +63,7 @@ public class VideoDetailDialog extends BottomPopupView {
         binding.url.setText(mActivity.getCurrentVodUrl());
         binding.tvLinkCopy.setOnClickListener(view -> {
             ClipboardUtils.copyText(mActivity.getCurrentVodUrl());
-            ToastUtils.showLong("已复制");
+            MD3ToastUtils.showToast("已复制");
         });
         String picUrl = DefaultConfig.checkReplaceProxy(mVideo.pic);
         if (!TextUtils.isEmpty(picUrl)){

@@ -82,6 +82,10 @@ public class SourceViewModel extends ViewModel {
             return;
         }
         SourceBean sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            sortResult.postValue(null);
+            return;
+        }
         int type = sourceBean.getType();
         if (type == 3) {
             Runnable waitResponse = new Runnable() {
@@ -425,6 +429,10 @@ public class SourceViewModel extends ViewModel {
     // detailContent
     public void getDetail(String sourceKey, String id) {
         SourceBean sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            detailResult.postValue(null);
+            return;
+        }
         int type = sourceBean.getType();
         if (type == 3) {
             spThreadPool.execute(new Runnable() {
@@ -481,6 +489,10 @@ public class SourceViewModel extends ViewModel {
     // searchContent
     public void getSearch(String sourceKey, String wd) {
         SourceBean sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            searchResult.postValue(null);
+            return;
+        }
         int type = sourceBean.getType();
         if (type == 3) {
             try {
@@ -565,6 +577,10 @@ public class SourceViewModel extends ViewModel {
     // searchContent
     public void getQuickSearch(String sourceKey, String wd) {
         SourceBean sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            quickSearchResult.postValue(null);
+            return;
+        }
         int type = sourceBean.getType();
         if (type == 3) {
             try {
@@ -643,6 +659,10 @@ public class SourceViewModel extends ViewModel {
     // playerContent
     public void getPlay(String sourceKey, String playFlag, String progressKey, String url, String subtitleKey) {
         SourceBean sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            playResult.postValue(null);
+            return;
+        }
         int type = sourceBean.getType();
         if (type == 3) {
             spThreadPool.execute(new Runnable() {

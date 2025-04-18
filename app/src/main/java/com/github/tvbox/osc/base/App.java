@@ -9,6 +9,9 @@ import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.bean.Subscription;
 import com.github.tvbox.osc.bean.VodInfo;
 import com.github.tvbox.osc.callback.EmptyCallback;
+import com.github.tvbox.osc.callback.EmptyCollectCallback;
+import com.github.tvbox.osc.callback.EmptyHistoryCallback;
+import com.github.tvbox.osc.callback.EmptySubscriptionCallback;
 import com.github.tvbox.osc.callback.LoadingCallback;
 import com.github.tvbox.osc.data.AppDataManager;
 import com.github.tvbox.osc.server.ControlManager;
@@ -59,6 +62,9 @@ public class App extends MultiDexApplication {
         AppDataManager.init();
         LoadSir.beginBuilder()
                 .addCallback(new EmptyCallback())
+                .addCallback(new EmptyCollectCallback())
+                .addCallback(new EmptyHistoryCallback())
+                .addCallback(new EmptySubscriptionCallback())
                 .addCallback(new LoadingCallback())
                 .commit();
         AutoSizeConfig.getInstance()
@@ -152,7 +158,7 @@ public class App extends MultiDexApplication {
                 .showRestartButton(true) //是否显示重启按钮
                 .trackActivities(true) //是否跟踪Activity
                 .minTimeBetweenCrashesMs(2000) //崩溃的间隔时间(毫秒)
-                .errorDrawable(R.drawable.app_icon) //错误图标
+                .errorDrawable(cat.ereza.customactivityoncrash.R.drawable.customactivityoncrash_error_image_m3) //错误图标
                 .restartActivity(MainActivity.class) //重新启动后的activity
                 .apply();
     }

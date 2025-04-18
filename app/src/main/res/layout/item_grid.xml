@@ -21,7 +21,7 @@
         <com.lihang.ShadowLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:hl_layoutBackground="@color/orange"
+            app:hl_layoutBackground="#232626"
             app:hl_cornerRadius_rightBottom="8dp">
             <TextView
                 android:id="@+id/tvYear"
@@ -32,7 +32,7 @@
                 android:padding="5dp"
                 android:singleLine="true"
                 tools:text="1970"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnTertiary"
                 android:textSize="10dp" />
         </com.lihang.ShadowLayout>
 
@@ -54,7 +54,7 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnSurface"
                 tools:text="更新至10集"
                 android:textSize="12sp"
                 android:drawablePadding="4dp"
@@ -67,7 +67,7 @@
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/white"
+                android:textColor="?attr/colorOnSurface"
                 tools:text="爱上大大"
                 android:singleLine="true"/>
 

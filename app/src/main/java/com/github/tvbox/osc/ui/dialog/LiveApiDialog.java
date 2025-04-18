@@ -43,9 +43,9 @@ public class LiveApiDialog extends CenterPopupView {
                 ToastUtils.showShort("暂无历史记录");
                 return;
             }
-            new XPopup.Builder(getContext())
-                    .asCustom(new ApiHistoryDialog(getContext(),liveApi, this::updateEt))
-                    .show();
+            // 直接创建ApiHistoryDialog并显示，不需要额外的XPopup.Builder
+            ApiHistoryDialog apiHistoryDialog = new ApiHistoryDialog(getContext(), liveApi, this::updateEt);
+            apiHistoryDialog.show();
         });
 
         mBinding.btnCancel.setOnClickListener(v -> dismiss());

@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.ScreenUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.github.tvbox.osc.util.MD3ToastUtils
 import com.github.tvbox.osc.R
 import com.github.tvbox.osc.api.ApiConfig
 import com.github.tvbox.osc.api.ApiConfig.LoadConfigCallback
@@ -41,6 +42,7 @@ import com.github.tvbox.osc.util.DefaultConfig
 import com.github.tvbox.osc.util.HawkConfig
 import com.github.tvbox.osc.viewmodel.SourceViewModel
 import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.core.BasePopupView
 import com.orhanobut.hawk.Hawk
 import com.owen.tvrecyclerview.widget.TvRecyclerView
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager
@@ -87,7 +89,7 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
             if (dataInitOk && jarInitOk) {
                 showSiteSwitch()
             } else {
-                ToastUtils.showShort("数据源未加载，长按刷新或切换订阅")
+                MD3ToastUtils.showToast("数据源未加载，长按刷新或切换订阅")
             }
         }
         mBinding.nameContainer.setOnLongClickListener {
@@ -348,7 +350,7 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
             }, sites, sites.indexOf(ApiConfig.get().homeSourceBean))
             dialog.show()
         } else {
-            ToastUtils.showLong("暂无可用数据源")
+            MD3ToastUtils.showLongToast("暂无可用数据源")
         }
     }
 
@@ -382,14 +384,15 @@ class HomeFragment : BaseVbFragment<FragmentHomeBinding>() {
             // 查询完成后更新UI
             if (vodInfoList.isNotEmpty() && vodInfoList[0] != null) {
                 XPopup.Builder(context)
-                    .hasShadowBg(false)
+                    .hasShadowBg(true) // 添加阴影背景，增强视觉效果
                     .isDestroyOnDismiss(true)
                     .isCenterHorizontal(true)
-                    .isTouchThrough(true)
-                    .offsetY(ScreenUtils.getAppScreenHeight() - 360)
+                    .isTouchThrough(false)
+                    .isDarkTheme(true) // 强制使用深色主题
+                    .offsetY(ScreenUtils.getAppScreenHeight() - 400)
                     .asCustom(LastViewedDialog(requireContext(), vodInfoList[0]))
                     .show()
-                    .delayDismiss(4000)
+                    .delayDismiss(5000)
             }
         }
     }

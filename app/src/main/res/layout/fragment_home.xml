@@ -53,24 +53,24 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="12sp"
             android:hint="搜索"
-            android:drawableTint="@color/gray_darker"
+            android:drawableTint="?attr/colorOutline"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="6dp"
-            android:drawableRight="@drawable/ic_search_18"/>
+            android:drawableRight="@drawable/ic_search_m3"/>
 
         <ImageView
             android:id="@+id/iv_collect"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:src="@drawable/ic_collect_48"/>
+            android:src="@drawable/ic_collect_m3"/>
 
         <ImageView
             android:id="@+id/iv_history"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:src="@drawable/ic_history_48"/>
+            android:src="@drawable/ic_history_m3"/>
 
     </LinearLayout>
 
@@ -84,14 +84,11 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:layout_marginTop="6dp"
+            style="@style/Widget.App.TabLayout"
             app:tabMode="scrollable"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorPrimary"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/gray_999"
-            app:tabIndicatorHeight="3dp"/>
+            app:tabGravity="fill"/>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mViewPager"

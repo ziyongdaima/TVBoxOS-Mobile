@@ -691,7 +691,10 @@ public class LiveActivity extends BaseActivity {
         }
         int smoothScrollToPosition = liveSettingItemAdapter.getSelectedItemIndex();
         if (smoothScrollToPosition < 0) smoothScrollToPosition = 0;
-        mSettingItemView.smoothScrollToPosition(smoothScrollToPosition);
+        // 确保滚动位置有效
+        if (mSettingItemView.getAdapter() != null && smoothScrollToPosition < mSettingItemView.getAdapter().getItemCount()) {
+            mSettingItemView.smoothScrollToPosition(smoothScrollToPosition);
+        }
         mHandler.removeCallbacks(mHideSettingLayoutRun);
         mHandler.postDelayed(mHideSettingLayoutRun, 5000);
     }
@@ -959,10 +962,16 @@ public class LiveActivity extends BaseActivity {
             if (groupIndex==0){//部分手机smoothScrollToPosition向上划出屏幕
                 mChannelGroupView.scrollToPosition(groupIndex);
             }else {
-                mChannelGroupView.smoothScrollToPosition(groupIndex);
+                // 确保滚动位置有效
+                if (mChannelGroupView.getAdapter() != null && groupIndex < mChannelGroupView.getAdapter().getItemCount()) {
+                    mChannelGroupView.smoothScrollToPosition(groupIndex);
+                }
             }
 
-            mLiveChannelView.smoothScrollToPosition(liveChannelIndex);
+            // 确保滚动位置有效
+            if (mLiveChannelView.getAdapter() != null && liveChannelIndex < mLiveChannelView.getAdapter().getItemCount()) {
+                mLiveChannelView.smoothScrollToPosition(liveChannelIndex);
+            }
             playChannel(groupIndex, liveChannelIndex, false);
         }
     }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/colorSurface">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,23 +20,25 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="4dp"
             android:text="@string/app_name"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_margin="20dp"
-        android:background="@drawable/bg_large_round_gray"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:scrollbars="none"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingVertical="20dp">
+            android:paddingVertical="8dp">
 
             <LinearLayout
                 android:id="@+id/llSubscription"
@@ -44,14 +47,18 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="24dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_menu_item_m3"
                 android:foreground="?android:selectableItemBackground"
+                android:elevation="1dp"
                 >
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_database_48" />
+                    android:src="@drawable/ic_subscriptions_outline_m3"
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,8 +70,9 @@
                     android:gravity="center"
                     android:text="订阅管理"
                     android:textAlignment="gravity"
-                    android:textColor="@color/text_foreground"
-                    android:textSize="16sp" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
 
                 <Space
                     android:layout_width="0dp"
@@ -72,12 +80,11 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:alpha="0.75"
-                    android:src="@drawable/icon_pre"
-                    app:tint="@color/text_foreground" />
+                    android:src="@drawable/ic_chevron_right_m3"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>
 
@@ -89,13 +96,17 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="24dp"
-                android:foreground="?android:selectableItemBackground">
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_menu_item_m3"
+                android:foreground="?android:selectableItemBackground"
+                android:elevation="1dp">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_history_48" />
+                    android:src="@drawable/ic_history_outline_m3"
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,8 +118,9 @@
                     android:gravity="center"
                     android:text="观看历史"
                     android:textAlignment="gravity"
-                    android:textColor="@color/text_foreground"
-                    android:textSize="16sp" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
 
                 <Space
                     android:layout_width="0dp"
@@ -116,12 +128,11 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:alpha="0.75"
-                    android:src="@drawable/icon_pre"
-                    app:tint="@color/text_foreground" />
+                    android:src="@drawable/ic_chevron_right_m3"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>
 
@@ -132,13 +143,17 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="24dp"
-                android:foreground="?android:selectableItemBackground">
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_menu_item_m3"
+                android:foreground="?android:selectableItemBackground"
+                android:elevation="1dp">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_collect_48" />
+                    android:src="@drawable/ic_collect_m3"
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -150,8 +165,9 @@
                     android:gravity="center"
                     android:text="收藏"
                     android:textAlignment="gravity"
-                    android:textColor="@color/text_foreground"
-                    android:textSize="16sp" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
 
                 <Space
                     android:layout_width="0dp"
@@ -159,12 +175,11 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:alpha="0.75"
-                    android:src="@drawable/icon_pre"
-                    app:tint="@color/text_foreground" />
+                    android:src="@drawable/ic_chevron_right_m3"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>
 
@@ -181,13 +196,17 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="24dp"
-                android:foreground="?android:selectableItemBackground">
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/bg_menu_item_m3"
+                android:foreground="?android:selectableItemBackground"
+                android:elevation="1dp">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_about_48" />
+                    android:src="@drawable/ic_about_outline_m3"
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,8 +218,9 @@
                     android:gravity="center"
                     android:text="关于"
                     android:textAlignment="gravity"
-                    android:textColor="@color/text_foreground"
-                    android:textSize="16sp" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
 
                 <Space
                     android:layout_width="0dp"
@@ -208,12 +228,11 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:alpha="0.75"
-                    android:src="@drawable/icon_pre"
-                    app:tint="@color/text_foreground" />
+                    android:src="@drawable/ic_chevron_right_m3"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>
 
@@ -224,13 +243,16 @@
                 android:orientation="horizontal"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="24dp"
-                android:foreground="?android:selectableItemBackground">
+                android:background="@drawable/bg_menu_item_m3"
+                android:foreground="?android:selectableItemBackground"
+                android:elevation="1dp">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_settings" />
+                    android:src="@drawable/ic_settings_m3"
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -242,8 +264,9 @@
                     android:gravity="center"
                     android:text="设置"
                     android:textAlignment="gravity"
-                    android:textColor="@color/text_foreground"
-                    android:textSize="16sp" />
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="16sp"
+                    android:fontFamily="sans-serif-medium" />
 
                 <Space
                     android:layout_width="0dp"
@@ -251,12 +274,11 @@
                     android:layout_weight="1" />
 
                 <ImageView
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_gravity="center"
-                    android:alpha="0.75"
-                    android:src="@drawable/icon_pre"
-                    app:tint="@color/text_foreground" />
+                    android:src="@drawable/ic_chevron_right_m3"
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
             </LinearLayout>
 
@@ -272,7 +294,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray_darker"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:fontFamily="sans-serif"
         />
 </LinearLayout>
 

@@ -39,7 +39,7 @@ public class ApiHistoryDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_title_list;
+        return R.layout.dialog_title_list_m3;
     }
 
     @Override

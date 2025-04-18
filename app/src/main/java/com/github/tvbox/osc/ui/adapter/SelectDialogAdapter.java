@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blankj.utilcode.util.ColorUtils;
 import com.github.tvbox.osc.R;
-import com.google.android.material.checkbox.MaterialCheckBox;
+import com.google.android.material.radiobutton.MaterialRadioButton;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -65,7 +65,8 @@ public class SelectDialogAdapter<T> extends ListAdapter<T, SelectDialogAdapter.S
     public void setData(List<T> newData, int defaultSelect) {
         data.clear();
         data.addAll(newData);
-        select = defaultSelect;
+        // 确保选择的位置有效
+        select = (defaultSelect >= 0 && defaultSelect < newData.size()) ? defaultSelect : 0;
         notifyDataSetChanged();
     }
 
@@ -77,15 +78,18 @@ public class SelectDialogAdapter<T> extends ListAdapter<T, SelectDialogAdapter.S
 
     @Override
     public SelectDialogAdapter.SelectViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new SelectDialogAdapter.SelectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dialog_select, parent, false));
+        return new SelectDialogAdapter.SelectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dialog_select_md3, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull SelectDialogAdapter.SelectViewHolder holder, @SuppressLint("RecyclerView") int position) {
         T value = data.get(position);
-        MaterialCheckBox view = holder.itemView.findViewById(R.id.tvName);
-        view.setChecked(position == select);
-        view.setText(dialogInterface.getDisplay(value));
+        MaterialRadioButton radioButton = holder.itemView.findViewById(R.id.tvName);
+        TextView textView = holder.itemView.findViewById(R.id.tvText);
+
+        radioButton.setChecked(position == select);
+        textView.setText(dialogInterface.getDisplay(value));
+
         holder.itemView.setOnClickListener(v -> {
             if (position == select)
                 return;

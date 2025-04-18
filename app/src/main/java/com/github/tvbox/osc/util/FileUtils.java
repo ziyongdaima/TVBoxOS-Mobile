@@ -41,13 +41,13 @@ public class FileUtils {
             .getExternalCacheDir()
             .getAbsolutePath() + "/qjscache_" + str + ".js");
     }
-    
+
     public static String genUUID() {
         return UUID.randomUUID()
             .toString()
             .replaceAll("-", "");
     }
-    
+
     public static String getCache(String name) {
         try {
             String code = "";
@@ -72,7 +72,7 @@ public class FileUtils {
             return "";
         }
     }
-    
+
     public static byte[] getCacheByte(String name) {
         try {
             File file = open("B_" + name);
@@ -89,7 +89,7 @@ public class FileUtils {
         try {
             JSONObject jSONObject = new JSONObject();
             jSONObject.put("expires", (int)(time + (System.currentTimeMillis() / 1000)));
-            jSONObject.put("data", Base64.encodeToString(data.getBytes(), Base64.URL_SAFE));    
+            jSONObject.put("data", Base64.encodeToString(data.getBytes(), Base64.URL_SAFE));
             writeSimple(jSONObject.toString().getBytes(), open(name));
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,14 +103,14 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
-    
+
     public static byte[] byteMerger(byte[] bt1, byte[] bt2){
         byte[] bt3 = new byte[bt1.length+bt2.length];
         System.arraycopy(bt1, 0, bt3, 0, bt1.length);
         System.arraycopy(bt2, 0, bt3, bt1.length, bt2.length);
         return bt3;
     }
-    
+
     public static String get(String str) {
         return get(str, null);
     }
@@ -144,7 +144,7 @@ public class FileUtils {
         	if (name.endsWith("ali.js")) {
                 name = "ali.js";
             } else if (name.endsWith("ali_api.js")) {
-                name = "ali_api.js";    
+                name = "ali_api.js";
             } else if (name.contains("similarity.js")) {
                 name = "similarity.js";
             } else if (name.contains("gbk.js")) {
@@ -247,7 +247,7 @@ public class FileUtils {
         }
         return null;
     }
-    
+
     public static String readFileToString(String path, String charsetName) {
         // 定义返回结果
         StringBuilder jsonString = new StringBuilder();
@@ -272,7 +272,7 @@ public class FileUtils {
         // 返回拼接好的JSON String
         return jsonString.toString();
     }
-    
+
     public static void copyFile(File source, File dest) throws IOException {
         try (InputStream is = new FileInputStream(source); OutputStream os = new FileOutputStream(dest)) {
             byte[] buffer = new byte[1024];
@@ -512,5 +512,25 @@ public class FileUtils {
             }
         }
         return;
+    }
+
+    /**
+     * 获取文件大小
+     * @param file 文件
+     * @return 文件大小
+     */
+    public static long getFileSize(File file) {
+        if (file == null || !file.exists()) return 0;
+        if (file.isFile()) return file.length();
+        return getFolderSize(file);
+    }
+
+    /**
+     * 格式化文件大小
+     * @param size 文件大小
+     * @return 格式化后的文件大小
+     */
+    public static String formatFileSize(long size) {
+        return getFormatSize((double) size);
     }
 }

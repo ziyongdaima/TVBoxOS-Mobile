@@ -27,10 +27,10 @@ public class SearchWordAdapter extends BaseQuickAdapter<String, BaseViewHolder> 
         tvWord.setText(item);
 
         if (helper.getLayoutPosition() == selectedPosition) {
-            tvWord.setTextColor(Color.WHITE); // 选中状态颜色
+            tvWord.setTextColor(helper.itemView.getContext().getResources().getColor(R.color.md3_on_primary, null)); // 选中状态颜色
             helper.itemView.setBackgroundResource(R.drawable.shape_setting_sort_focus);
         } else {
-            tvWord.setTextColor(Color.parseColor("#CCCCCC")); // 未选中状态颜色
+            tvWord.setTextColor(helper.itemView.getContext().getResources().getColor(R.color.md3_on_surface_variant, null)); // 未选中状态颜色
             helper.itemView.setBackgroundResource(R.drawable.shape_setting_sort_normal);
         }
     }

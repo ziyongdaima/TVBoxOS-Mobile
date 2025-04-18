@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SubscriptionAdapter extends BaseQuickAdapter<Subscription, BaseViewHolder> {
     public SubscriptionAdapter() {
-        super(R.layout.item_subscription);
+        super(R.layout.item_subscription_md3);
     }
 
     @Override

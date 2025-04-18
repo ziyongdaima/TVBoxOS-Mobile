@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.api.ApiConfig;
 import com.github.tvbox.osc.bean.Movie;
+import com.github.tvbox.osc.bean.SourceBean;
 import com.github.tvbox.osc.picasso.RoundTransformation;
 import com.github.tvbox.osc.util.HawkConfig;
 import com.github.tvbox.osc.util.MD5;
@@ -28,7 +29,12 @@ public class FastSearchAdapter extends BaseQuickAdapter<Movie.Video, BaseViewHol
 
         // with preview
         helper.setText(R.id.tvName, item.name);
-        helper.setText(R.id.tvSite, ApiConfig.get().getSource(item.sourceKey).getName());
+
+        // 添加空值检查，防止空指针异常
+        SourceBean sourceBean = ApiConfig.get().getSource(item.sourceKey);
+        String siteName = sourceBean != null ? sourceBean.getName() : (item.sourceKey != null ? item.sourceKey : "未知来源");
+        helper.setText(R.id.tvSite, siteName);
+
         helper.setVisible(R.id.tvNote, item.note != null && !item.note.isEmpty());
         if (item.note != null && !item.note.isEmpty()) {
             helper.setText(R.id.tvNote, item.note);

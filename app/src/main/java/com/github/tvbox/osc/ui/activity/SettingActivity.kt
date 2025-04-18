@@ -7,6 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.DiffUtil
 import com.blankj.utilcode.util.ToastUtils
 import com.github.tvbox.osc.R
+import com.github.tvbox.osc.util.MD3ToastUtils
 import com.github.tvbox.osc.api.ApiConfig
 import com.github.tvbox.osc.base.BaseVbActivity
 import com.github.tvbox.osc.bean.IJKCode
@@ -15,7 +16,7 @@ import com.github.tvbox.osc.databinding.ActivitySettingBinding
 import com.github.tvbox.osc.ui.adapter.SelectDialogAdapter
 import com.github.tvbox.osc.ui.adapter.SelectDialogAdapter.SelectDialogInterface
 import com.github.tvbox.osc.ui.dialog.BackupDialog
-import com.github.tvbox.osc.ui.dialog.LiveApiDialog
+
 import com.github.tvbox.osc.ui.dialog.SelectDialog
 import com.github.tvbox.osc.util.FastClickCheckUtil
 import com.github.tvbox.osc.util.FileUtils
@@ -42,13 +43,22 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
 
     private var homeRec = Hawk.get(HawkConfig.HOME_REC, 0)
     private var dnsOpt = Hawk.get(HawkConfig.DOH_URL, 0)
-    private var currentLiveApi = Hawk.get(HawkConfig.LIVE_URL, "")
+
     override fun init() {
 
         mBinding.titleBar.leftView.setOnClickListener { onBackPressed() }
         mBinding.tvMediaCodec.text = Hawk.get(HawkConfig.IJK_CODEC, "")
 
-        mBinding.tvDns.text = OkGoHelper.dnsHttpsList[Hawk.get(HawkConfig.DOH_URL, 0)]
+        // 确保使用有效的索引访问 dnsHttpsList
+        val dnsIndex = Hawk.get(HawkConfig.DOH_URL, 0)
+        val safeDnsIndex = if (dnsIndex >= 0 && dnsIndex < OkGoHelper.dnsHttpsList.size) {
+            dnsIndex
+        } else {
+            // 如果索引无效，重置为0（关闭）
+            Hawk.put(HawkConfig.DOH_URL, 0)
+            0
+        }
+        mBinding.tvDns.text = OkGoHelper.dnsHttpsList[safeDnsIndex]
         mBinding.tvHomeRec.text = getHomeRecName(Hawk.get(HawkConfig.HOME_REC, 0))
         mBinding.tvHistoryNum.text =
             HistoryHelper.getHistoryNumName(Hawk.get(HawkConfig.HISTORY_NUM, 0))
@@ -64,12 +74,7 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
             Hawk.put(HawkConfig.PRIVATE_BROWSING, newConfig)
         }
 
-        mBinding.llLiveApi.setOnClickListener {
-            XPopup.Builder(mContext)
-                .autoFocusEditText(false)
-                .asCustom(LiveApiDialog(this))
-                .show()
-        }
+
 
         val defaultBgPlayTypePos = Hawk.get(HawkConfig.BACKGROUND_PLAY_TYPE, 0)
         val bgPlayTypes = ArrayList<String>()
@@ -151,10 +156,34 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
             }
         }
 
-        // 暂时禁用DNS设置功能，等待后续修复
+        // DNS设置功能
         mBinding.llDns.setOnClickListener { v: View? ->
             FastClickCheckUtil.check(v)
-            ToastUtils.showShort("暂时禁用DNS设置功能，等待后续修复")
+            val currentValue = Hawk.get(HawkConfig.DOH_URL, 0)
+            // 切换DNS状态：如果当前是关闭状态，则开启；如果当前是开启状态，则关闭
+            val newValue = if (currentValue == 0) 1 else 0
+            // 确保新值在有效范围内
+            if (newValue >= 0 && newValue < OkGoHelper.dnsHttpsList.size) {
+                Hawk.put(HawkConfig.DOH_URL, newValue)
+                mBinding.tvDns.text = OkGoHelper.dnsHttpsList[newValue]
+                dnsOpt = newValue
+                OkGoHelper.dnsOverHttps = null
+                OkGoHelper.init()
+                // 显示提示信息
+                if (newValue == 1) {
+                    MD3ToastUtils.showToast("已开启阿里DNS，网络访问更安全")
+                } else {
+                    MD3ToastUtils.showToast("已关闭安全DNS")
+                }
+            } else {
+                // 如果新值无效，重置为0（关闭）
+                Hawk.put(HawkConfig.DOH_URL, 0)
+                mBinding.tvDns.text = OkGoHelper.dnsHttpsList[0]
+                dnsOpt = 0
+                OkGoHelper.dnsOverHttps = null
+                OkGoHelper.init()
+                MD3ToastUtils.showToast("已关闭安全DNS")
+            }
         }
 
         mBinding.llMediaCodec.setOnClickListener { v: View? ->
@@ -350,10 +379,13 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
             }, types, defaultPos)
             dialog.show()
         }
-        mBinding.llClearCache.setOnClickListener { view: View ->
-            XPopup.Builder(this)
-                .isDarkTheme(Utils.isDarkTheme())
-                .asConfirm("提示", "确定清空吗？") { onClickClearCache(view) }.show()
+        // 计算缓存大小
+        calculateCacheSize()
+
+        // 清空缓存按钮点击事件
+        mBinding.btnClearCache.setOnClickListener {
+            FastClickCheckUtil.check(it)
+            clearCache()
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             mBinding.llTheme.visibility = View.GONE
@@ -419,35 +451,68 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
         if (homeRec != Hawk.get(HawkConfig.HOME_REC, 0) || dnsOpt != Hawk.get(
                 HawkConfig.DOH_URL,
                 0
-            ) || currentLiveApi != Hawk.get(HawkConfig.LIVE_URL, "")
-        ) { // 首页类型/dns/doh/直播源有更改,需重载页面
-            //AppManager.getInstance().finishAllActivity()
-            if (currentLiveApi == Hawk.get(HawkConfig.LIVE_URL, "")) { //未更改直播源,不需重载api等
-                val bundle = Bundle()
-                bundle.putBoolean(IntentKey.CACHE_CONFIG_CHANGED, true)
-                jumpActivity(MainActivity::class.java, bundle)
-            } else {
-                jumpActivity(MainActivity::class.java)
-            }
+            )
+        ) { // 首页类型/dns/doh有更改,需重载页面
+            val bundle = Bundle()
+            bundle.putBoolean(IntentKey.CACHE_CONFIG_CHANGED, true)
+            jumpActivity(MainActivity::class.java, bundle)
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         } else {
             super.onBackPressed()
         }
     }
 
-    private fun onClickClearCache(v: View) {
-        FastClickCheckUtil.check(v)
+    private fun calculateCacheSize() {
+        Thread {
+            try {
+                val cachePath = FileUtils.getCachePath()
+                val cacheDir = File(cachePath)
+                if (!cacheDir.exists()) {
+                    runOnUiThread {
+                        mBinding.tvCacheSizeLabel.text = "缓存大小（0 MB）"
+                    }
+                    return@Thread
+                }
+                val size = FileUtils.getFileSize(cacheDir)
+                val readableSize = FileUtils.formatFileSize(size)
+                runOnUiThread {
+                    mBinding.tvCacheSizeLabel.text = "缓存大小（${readableSize}）"
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                runOnUiThread {
+                    mBinding.tvCacheSizeLabel.text = "缓存大小（计算失败）"
+                }
+            }
+        }.start()
+    }
+
+    private fun clearCache() {
         val cachePath = FileUtils.getCachePath()
         val cacheDir = File(cachePath)
         if (!cacheDir.exists()) return
+
+        // 显示清理中的提示
+        mBinding.tvCacheSizeLabel.text = "缓存大小（清理中...）"
+        mBinding.btnClearCache.isEnabled = false
+
         Thread {
             try {
                 FileUtils.cleanDirectory(cacheDir)
+                runOnUiThread {
+                    MD3ToastUtils.showToast("缓存已清空")
+                    mBinding.tvCacheSizeLabel.text = "缓存大小（0 MB）"
+                    mBinding.btnClearCache.isEnabled = true
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
+                runOnUiThread {
+                    MD3ToastUtils.showToast("清空缓存失败")
+                    calculateCacheSize() // 重新计算缓存大小
+                    mBinding.btnClearCache.isEnabled = true
+                }
             }
         }.start()
-        ToastUtils.showLong("缓存已清空")
     }
 
     private fun getHomeRecName(type: Int): String {

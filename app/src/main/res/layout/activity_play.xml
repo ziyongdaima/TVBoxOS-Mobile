@@ -14,15 +14,16 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/play_loading"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         app:lottie_autoPlay="true"
         android:scaleType="centerCrop"
-        app:lottie_fileName="anim_loading.json"
-        app:lottie_speed="2"
+        app:lottie_fileName="md3_loading.json"
+        app:lottie_speed="1"
         app:lottie_loop="true"
-        app:lottie_repeatMode="reverse"/>
+        app:lottie_colorFilter="?attr/colorPrimary"
+        app:lottie_repeatMode="restart"/>
 
     <ImageView
         android:id="@+id/play_load_error"

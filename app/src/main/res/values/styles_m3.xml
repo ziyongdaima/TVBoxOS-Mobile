@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material Design 3 Switch 样式 -->
+    <style name="Widget.App.Switch.M3" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:thumb">@drawable/switch_thumb_m3</item>
+        <item name="track">@drawable/switch_track_m3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:thumbOffset">2dp</item>
+    </style>
+
+    <!-- Material Design 3 SwitchMaterial 样式 -->
+    <style name="Widget.App.SwitchMaterial.M3" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:thumb">@drawable/switch_thumb_m3</item>
+        <item name="track">@drawable/switch_track_m3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:thumbOffset">2dp</item>
+    </style>
+
+    <!-- Material Design 3 SwitchCompat 样式 -->
+    <style name="Widget.App.SwitchCompat.M3" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:thumb">@drawable/switch_thumb_m3</item>
+        <item name="track">@drawable/switch_track_m3</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:thumbOffset">2dp</item>
+    </style>
+    <!-- 胶囊形状开关按钮样式 -->
+    <style name="Widget.App.Switch.Capsule" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:thumb">@drawable/switch_thumb_capsule</item>
+        <item name="track">@drawable/switch_track_capsule</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:thumbOffset">2dp</item>
+    </style>
+    <!-- 亮青色开关按钮样式 -->
+    <style name="Widget.App.Switch.BrightCyan" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="android:thumb">@drawable/switch_thumb_bright_cyan</item>
+        <item name="track">@drawable/switch_track_capsule</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">40dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:thumbOffset">2dp</item>
+    </style>
+</resources>

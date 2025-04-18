@@ -1,13 +1,56 @@
 <resources>
 
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!--应用的主要色调,actionBar默认使用该颜色,Toolbar导航栏的底色-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <!--CheckBox,RadioButton,SwitchCompat等一般控件的选中效果默认采用该颜色-->
-        <item name="colorAccent">@color/colorAccent</item>
-        <!--默认window窗口(activity)背景颜色,根据主题修改该属性可 避免某些情况activity跳转/回跳会白屏(出现与主题相反的颜色)-->
-        <item name="android:windowBackground">@color/windowBackground</item>
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Material Design 3 主题色 -->
+        <item name="colorPrimary">@color/md3_primary</item>
+        <item name="colorOnPrimary">@color/md3_on_primary</item>
+        <item name="colorPrimaryContainer">@color/md3_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/md3_on_primary_container</item>
+
+        <item name="colorSecondary">@color/md3_secondary</item>
+        <item name="colorOnSecondary">@color/md3_on_secondary</item>
+        <item name="colorSecondaryContainer">@color/md3_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/md3_on_secondary_container</item>
+
+        <item name="colorTertiary">@color/md3_tertiary</item>
+        <item name="colorOnTertiary">@color/md3_on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/md3_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/md3_on_tertiary_container</item>
+
+        <item name="colorError">@color/md3_error</item>
+        <item name="colorOnError">@color/md3_on_error</item>
+        <item name="colorErrorContainer">@color/md3_error_container</item>
+        <item name="colorOnErrorContainer">@color/md3_on_error_container</item>
+
+        <item name="android:colorBackground">@color/md3_background</item>
+        <item name="colorOnBackground">@color/md3_on_background</item>
+        <item name="colorSurface">@color/md3_surface</item>
+        <item name="colorOnSurface">@color/md3_on_surface</item>
+        <item name="colorSurfaceVariant">@color/md3_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/md3_on_surface_variant</item>
+
+        <item name="colorOutline">@color/md3_outline</item>
+        <item name="colorOutlineVariant">@color/md3_outline_variant</item>
+
+        <!-- Material Design 3 Surface Container 颜色 -->
+        <item name="colorSurfaceContainerLowest">@color/md3_surface_container_lowest</item>
+        <item name="colorSurfaceContainerLow">@color/md3_surface_container_low</item>
+        <item name="colorSurfaceContainer">@color/md3_surface_container</item>
+        <item name="colorSurfaceContainerHigh">@color/md3_surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/md3_surface_container_highest</item>
+
+        <item name="colorAccent">@color/md3_primary</item>
+        <item name="android:windowBackground">@color/md3_background</item>
+
+        <!-- 底部导航栏样式 -->
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+        <!-- 标签栏样式 -->
+        <item name="tabStyle">@style/Widget.App.TabLayout</item>
+
+        <!-- Material Design 3 Switch 样式 -->
+        <item name="switchStyle">@style/Widget.App.Switch.M3</item>
+        <item name="materialSwitchStyle">@style/Widget.App.SwitchMaterial.M3</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
@@ -82,55 +125,50 @@
 
 
     <!-- 实心通用主题色,MaterialButton样式-->
-    <style name="mbSolid" parent="@style/Widget.MaterialComponents.Button.UnelevatedButton">
-
-        <item name="android:textColor">@color/white</item>
+    <style name="mbSolid" parent="@style/Widget.Material3.Button">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:gravity">center</item>
         <item name="backgroundTintMode">src_atop</item>
-        <item name="backgroundTint">@color/colorPrimary</item>
-        <!--        <item name="rippleColor">@color/white</item>-->
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="rippleColor">?attr/colorOnPrimary</item>
 
         <item name="iconTintMode">src_atop</item>
-        <item name="iconTint">@color/white</item>
+        <item name="iconTint">?attr/colorOnPrimary</item>
         <item name="iconGravity">textStart</item>
         <item name="iconPadding">0dp</item>
-        <!--        <item name="iconSize">20dp</item>-->
-
         <item name="cornerRadius">@dimen/common_corners</item>
     </style>
 
     <!-- 带边框的空心MaterialButton样式-->
-    <style name="mbOutline" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <!--        <item name="android:textColor">@color/colorPrimary</item>-->
-        <!--        <item name="android:textAllCaps">false</item>-->
+    <style name="mbOutline" parent="@style/Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">13sp</item>
-        <!--        <item name="rippleColor">@color/white</item>-->
-        <!--        <item name="strokeWidth">1dp</item>-->
-        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="rippleColor">?attr/colorPrimaryContainer</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
         <item name="cornerRadius">@dimen/common_corners</item>
-        <!--        <item name="iconTintMode">src_atop</item>-->
-        <!--        <item name="iconTint">@color/white</item>-->
-        <!--        <item name="iconGravity">textStart</item>-->
-        <!--        <item name="iconPadding">0dp</item>-->
-        <!--        <item name="iconSize">20dp</item>-->
-
+        <item name="iconTintMode">src_atop</item>
+        <item name="iconTint">?attr/colorPrimary</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
     </style>
 
 <!--文件选择器样式,在此只改变了背景和基本颜色-->
     <style name="FileChooser" parent="FileChooserStyle">
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorSecondary">@color/colorPrimary</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/material_deep_teal_200</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textColorPrimary">?attr/colorPrimary</item>
+        <item name="android:textColorSecondary">?attr/colorPrimary</item>
+        <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorPrimaryDark">?attr/colorPrimary</item>
+        <item name="colorAccent">?attr/colorSecondary</item>
         <item name="fileChooserDialogStyle">@style/FileChooserDialogStyle1</item>
         <item name="fileChooserListItemStyle">@style/FileChooserListItemStyle1</item>
         <item name="fileChooserPathViewStyle">@style/FileChooserPathViewStyle1</item>
@@ -155,21 +193,94 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
     <style name="FileChooserTextNameStyle1" parent="FileChooserTextNameStyle">
-        <item name="android:textColor">@color/text_foreground</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
     <style name="FileChooserTextSizeStyle1" parent="FileChooserTextSizeStyle">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
     </style>
     <style name="FileChooserTextDateStyle1" parent="FileChooserTextDateStyle">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 <!--    文件选择器条目样式结束-->
 
     <!-- 选择器文件路径样式   -->
     <style name="FileChooserPathViewStyle1" parent="FileChooserPathViewStyle">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textColor">@color/text_foreground</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
 
+    <!-- Material Design 3 底部导航栏样式 -->
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="elevation">0dp</item>
+        <item name="itemIconSize">24dp</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemPaddingTop">16dp</item>
+        <item name="itemPaddingBottom">16dp</item>
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.App.BottomNavigation.ActiveIndicator</item>
+        <item name="itemRippleColor">?attr/colorPrimaryContainer</item>
+    </style>
+
+    <!-- Material Design 3 标签栏样式 -->
+    <style name="Widget.App.TabLayout" parent="Widget.Material3.TabLayout">
+        <item name="android:background">?attr/colorSurfaceContainer</item>
+        <item name="tabIndicatorColor">?attr/colorPrimary</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorRadius">1.5dp</item>
+        <item name="tabPaddingStart">16dp</item>
+        <item name="tabPaddingEnd">16dp</item>
+        <item name="tabRippleColor">?attr/colorPrimaryContainer</item>
+    </style>
+
+    <!-- 带有深灰色描边的文本按钮样式 -->
+    <style name="Widget.App.Button.OutlinedButton.DarkGray" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">#232626</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@color/ripple_material_dark</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- 实心按钮样式 -->
+    <style name="Widget.App.Button.Filled" parent="Widget.Material3.Button">
+        <item name="android:textColor">#232626</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <!-- 弹窗取消按钮样式 -->
+    <style name="Widget.App.Dialog.Button.Cancel" parent="Widget.App.Button.OutlinedButton.DarkGray">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:minWidth">120dp</item>
+    </style>
+
+    <!-- 弹窗确认按钮样式 -->
+    <style name="Widget.App.Dialog.Button.Confirm" parent="Widget.App.Button.Filled">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="android:minWidth">120dp</item>
+    </style>
+
+    <!-- 详细错误信息弹窗样式 -->
+    <style name="ThemeOverlay.App.MaterialAlertDialog.ErrorDetail" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button.Dialog.ErrorDetail</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.App.Button.Dialog.ErrorDetail</item>
+    </style>
+
+    <!-- 详细错误信息弹窗按钮样式 -->
+    <style name="Widget.App.Button.Dialog.ErrorDetail" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/color_FFFFFF</item>
+    </style>
 </resources>

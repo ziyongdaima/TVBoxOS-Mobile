@@ -18,17 +18,12 @@ public class AboutDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_about;
+        return R.layout.dialog_about_m3;
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
-        findViewById(R.id.iv_close).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
+
     }
 }

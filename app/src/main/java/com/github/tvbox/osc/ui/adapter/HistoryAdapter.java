@@ -49,7 +49,7 @@ public class HistoryAdapter extends BaseQuickAdapter<VodInfo, BaseViewHolder> {
             tvNote.setVisibility(View.GONE);
         } else {
             tvNote.setText(item.note);
-            Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_history_18);
+            Drawable drawable = ContextCompat.getDrawable(mContext, R.drawable.ic_history_18_m3);
             tvNote.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         }
         helper.setText(R.id.tvName, item.name);

@@ -11,6 +11,7 @@ import com.github.catvod.net.SSLCompat;
 import com.github.tvbox.osc.base.App;
 import com.github.tvbox.osc.picasso.MyOkhttpDownLoader;
 import com.github.tvbox.osc.util.urlhttp.BrotliInterceptor;
+import com.github.tvbox.osc.util.LOG;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
@@ -74,25 +75,20 @@ public class OkGoHelper {
     }
 
     public static String getDohUrl(int type) {
-        switch (type) {
+        // 确保type在有效范围内
+        int safeType = Math.min(Math.max(type, 0), 1);
+        switch (safeType) {
             case 1: {
-                return "https://doh.pub/dns-query";
-            }
-            case 2: {
                 return "https://dns.alidns.com/dns-query";
-            }
-            case 3: {
-                return "https://doh.360.cn/dns-query";
             }
         }
         return "";
     }
 
     static void initDnsOverHttps() {
+        dnsHttpsList.clear();
         dnsHttpsList.add("关闭");
-        dnsHttpsList.add("腾讯");
-        dnsHttpsList.add("阿里");
-        dnsHttpsList.add("360");
+        dnsHttpsList.add("阿里DNS");
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkExoPlayer");
         if (Hawk.get(HawkConfig.DEBUG_OPEN, false)) {
@@ -111,7 +107,13 @@ public class OkGoHelper {
         builder.connectionSpecs(getConnectionSpec());
         builder.cache(new Cache(new File(App.getInstance().getCacheDir().getAbsolutePath(), "dohcache"), 10 * 1024 * 1024));
         OkHttpClient dohClient = builder.build();
-        String dohUrl = getDohUrl(Hawk.get(HawkConfig.DOH_URL, 0));
+        // 确保使用有效的DOH索引
+        int dohIndex = Hawk.get(HawkConfig.DOH_URL, 0);
+        if (dohIndex < 0 || dohIndex >= dnsHttpsList.size()) {
+            dohIndex = 0;
+            Hawk.put(HawkConfig.DOH_URL, 0);
+        }
+        String dohUrl = getDohUrl(dohIndex);
         dnsOverHttps = new DnsOverHttps.Builder().client(dohClient).url(dohUrl.isEmpty() ? null : HttpUrl.get(dohUrl)).build();
     }
     static OkHttpClient defaultClient = null;
@@ -170,12 +172,23 @@ public class OkGoHelper {
     static void initPicasso(OkHttpClient client) {
         client.dispatcher().setMaxRequestsPerHost(32);
         MyOkhttpDownLoader downloader = new MyOkhttpDownLoader(client);
-        Picasso picasso = new Picasso.Builder(App.getInstance())
-                .downloader(downloader)
-                .executor(HeavyTaskUtil.getBigTaskExecutorService())
-                .defaultBitmapConfig(Bitmap.Config.RGB_565)
-                .build();
-        Picasso.setSingletonInstance(picasso);
+        try {
+            // 检查是否已经存在Picasso单例实例
+            Picasso.get().shutdown();
+        } catch (Exception e) {
+            // 如果Picasso单例不存在，会抛出异常，忽略它
+        }
+        try {
+            Picasso picasso = new Picasso.Builder(App.getInstance())
+                    .downloader(downloader)
+                    .executor(HeavyTaskUtil.getBigTaskExecutorService())
+                    .defaultBitmapConfig(Bitmap.Config.RGB_565)
+                    .build();
+            Picasso.setSingletonInstance(picasso);
+        } catch (IllegalStateException e) {
+            // 如果单例已存在，使用现有的Picasso实例
+            LOG.e("Picasso singleton already exists, using existing instance");
+        }
     }
 
     private static synchronized void setOkHttpSsl(OkHttpClient.Builder builder) {

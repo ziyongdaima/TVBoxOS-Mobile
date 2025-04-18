@@ -24,7 +24,7 @@ public class SelectDialog<T> extends BaseDialog {
 
     public SelectDialog(@NonNull @NotNull Context context) {
         super(context);
-        setContentView(R.layout.dialog_select);
+        setContentView(R.layout.dialog_select_md3);
     }
 
     public SelectDialog(@NonNull @NotNull Context context, int resId) {
@@ -42,7 +42,23 @@ public class SelectDialog<T> extends BaseDialog {
         lp.width = ConvertUtils.dp2px(330);
         getWindow().setAttributes(lp);
         getWindow().setWindowAnimations(R.style.DialogFadeAnimation); // Set the animation style
-        findViewById(R.id.iv_close).setOnClickListener(view -> dismiss());
+
+        // 设置深色主题
+        getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
+        int nightModeFlags = getContext().getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            // 已经是深色模式
+        } else {
+            // 强制使用深色主题颜色
+            View rootView = findViewById(R.id.cl_root);
+            if (rootView != null) {
+                rootView.setBackgroundResource(R.drawable.bg_dialog_dark);
+            }
+            TextView titleView = findViewById(R.id.title);
+            if (titleView != null) {
+                titleView.setTextColor(getContext().getResources().getColor(R.color.color_FFFFFF));
+            }
+        }
     }
 
     public void setTip(String tip) {
@@ -54,12 +70,19 @@ public class SelectDialog<T> extends BaseDialog {
         adapter.setData(data, select);
         TvRecyclerView tvRecyclerView = ((TvRecyclerView) findViewById(R.id.list));
         tvRecyclerView.setAdapter(adapter);
-        tvRecyclerView.setSelectedPosition(select);
+
+        // 确保选择的位置有效
+        final int validPosition = (select >= 0 && select < data.size()) ? select : 0;
+
+        tvRecyclerView.setSelectedPosition(validPosition);
         tvRecyclerView.post(new Runnable() {
             @Override
             public void run() {
-                tvRecyclerView.smoothScrollToPosition(select);
-                tvRecyclerView.setSelectionWithSmooth(select);
+                // 再次检查适配器是否已经设置并且有数据
+                if (tvRecyclerView.getAdapter() != null && tvRecyclerView.getAdapter().getItemCount() > 0) {
+                    tvRecyclerView.smoothScrollToPosition(validPosition);
+                    tvRecyclerView.setSelectionWithSmooth(validPosition);
+                }
             }
         });
     }

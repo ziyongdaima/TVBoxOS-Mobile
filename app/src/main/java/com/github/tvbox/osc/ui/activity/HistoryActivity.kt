@@ -8,11 +8,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.github.tvbox.osc.base.BaseVbActivity
 import com.github.tvbox.osc.bean.VodInfo
 import com.github.tvbox.osc.cache.RoomDataManger
+import com.github.tvbox.osc.callback.EmptyHistoryCallback
 import com.github.tvbox.osc.databinding.ActivityHistoryBinding
+import com.github.tvbox.osc.ui.activity.DetailActivity
 import com.github.tvbox.osc.ui.adapter.HistoryAdapter
+
+import com.github.tvbox.osc.ui.dialog.ConfirmDialog
 import com.github.tvbox.osc.util.FastClickCheckUtil
+import com.github.tvbox.osc.util.MD3DialogUtils
 import com.github.tvbox.osc.util.Utils
-import com.lxj.xpopup.XPopup
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +30,7 @@ class HistoryActivity : BaseVbActivity<ActivityHistoryBinding>() {
     }
 
     private fun initView() {
-        setLoadSir(mBinding.mGridView)
+        setLoadSir(mBinding.mGridView, EmptyHistoryCallback::class.java)
 
         mBinding.mGridView.setHasFixedSize(true)
         mBinding.mGridView.setLayoutManager(GridLayoutManager(this, 3))
@@ -46,23 +50,29 @@ class HistoryActivity : BaseVbActivity<ActivityHistoryBinding>() {
             }
 
         mBinding.titleBar.rightView.setOnClickListener { view: View? ->
-            XPopup.Builder(this)
-                .isDarkTheme(Utils.isDarkTheme())
-                .asConfirm("提示", "确定清空?") {
-
-                    showLoadingDialog()
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        RoomDataManger.deleteVodRecordAll()
-                        // 在主线程更新数据
-                        withContext(Dispatchers.Main) {
-                            dismissLoadingDialog()
-                            historyAdapter!!.setNewData(ArrayList())
-                            mBinding.topTip.visibility = View.GONE
-                            showEmpty()
+            // 使用MD3DialogUtils显示符合Material Design 3规范的对话框
+            MD3DialogUtils.showConfirmDialog(
+                this,
+                "提示",
+                "确定清空历史记录?",
+                "取消",
+                "确定",
+                object : ConfirmDialog.OnDialogActionListener {
+                    override fun onConfirm() {
+                        showLoadingDialog()
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            RoomDataManger.deleteVodRecordAll()
+                            // 在主线程更新数据
+                            withContext(Dispatchers.Main) {
+                                dismissLoadingDialog()
+                                historyAdapter!!.setNewData(ArrayList())
+                                mBinding.topTip.visibility = View.GONE
+                                showEmpty(EmptyHistoryCallback::class.java)
+                            }
                         }
                     }
-
-                }.show()
+                }
+            )
         }
 
         historyAdapter!!.onItemClickListener =
@@ -93,7 +103,7 @@ class HistoryActivity : BaseVbActivity<ActivityHistoryBinding>() {
                     showSuccess()
                     mBinding.topTip.visibility = View.VISIBLE
                 } else {
-                    showEmpty()
+                    showEmpty(EmptyHistoryCallback::class.java)
                 }
             }
         }

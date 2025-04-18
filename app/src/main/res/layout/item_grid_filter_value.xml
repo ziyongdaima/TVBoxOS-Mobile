@@ -9,10 +9,10 @@
     app:hl_bindTextView="@+id/filterValue"
     app:hl_cornerRadius="@dimen/common_corners"
     app:hl_layoutBackground="@android:color/transparent"
-    app:hl_layoutBackground_true="@color/colorPrimary"
+    app:hl_layoutBackground_true="?attr/colorPrimary"
     app:hl_shapeMode="selected"
-    app:hl_textColor="@color/text_foreground"
-    app:hl_textColor_true="#fff">
+    app:hl_textColor="?attr/colorOnSurface"
+    app:hl_textColor_true="?attr/colorOnPrimary">
 
     <TextView
         android:id="@+id/filterValue"
@@ -25,5 +25,5 @@
         android:paddingHorizontal="6dp"
         android:singleLine="true"
         tools:text="中国大陆"
-        android:textColor="@color/text_foreground" />
+        android:textColor="?attr/colorOnSurface" />
 </com.lihang.ShadowLayout>

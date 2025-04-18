@@ -50,13 +50,17 @@ public class LiveSettingDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_live_setting;
+        return R.layout.dialog_live_setting_m3;
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
         mBinding = DialogLiveSettingBinding.bind(getPopupImplView());
+
+        // 设置关闭按钮点击事件
+        findViewById(R.id.iv_close).setOnClickListener(v -> dismiss());
+
         initSettingGroupView();
         initSettingItemView();
         initLiveSettingGroupList();

@@ -11,11 +11,13 @@ import com.github.tvbox.osc.base.BaseVbActivity
 import com.github.tvbox.osc.bean.VodInfo
 import com.github.tvbox.osc.cache.RoomDataManger
 import com.github.tvbox.osc.cache.VodCollect
+import com.github.tvbox.osc.callback.EmptyCollectCallback
 import com.github.tvbox.osc.databinding.ActivityCollectBinding
 import com.github.tvbox.osc.ui.adapter.CollectAdapter
 import com.github.tvbox.osc.util.FastClickCheckUtil
+import com.github.tvbox.osc.util.MD3DialogUtils
 import com.github.tvbox.osc.util.Utils
-import com.lxj.xpopup.XPopup
+import com.github.tvbox.osc.ui.dialog.ConfirmDialog
 import com.owen.tvrecyclerview.widget.V7GridLayoutManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,26 +32,33 @@ class CollectActivity : BaseVbActivity<ActivityCollectBinding>() {
     }
 
     private fun initView() {
-        setLoadSir(mBinding.mGridView)
+        setLoadSir(mBinding.mGridView, EmptyCollectCallback::class.java)
 
         mBinding.mGridView.setHasFixedSize(true)
         mBinding.mGridView.setLayoutManager(GridLayoutManager(this, 3))
         mBinding.mGridView.setAdapter(collectAdapter)
         mBinding.titleBar.rightView.setOnClickListener {
-            XPopup.Builder(this)
-                .isDarkTheme(Utils.isDarkTheme())
-                .asConfirm("提示", "确定清空?") {
-                    showLoadingDialog()
-                    lifecycleScope.launch(Dispatchers.IO){
-                        RoomDataManger.deleteVodCollectAll()
-                        withContext(Dispatchers.Main){
-                            dismissLoadingDialog()
-                            collectAdapter.setNewData(ArrayList())
-                            mBinding.topTip.visibility = View.GONE
-                            showEmpty()
+            MD3DialogUtils.showConfirmDialog(
+                this,
+                "提示",
+                "确定清空?",
+                "取消",
+                "确定",
+                object : ConfirmDialog.OnDialogActionListener {
+                    override fun onConfirm() {
+                        showLoadingDialog()
+                        lifecycleScope.launch(Dispatchers.IO){
+                            RoomDataManger.deleteVodCollectAll()
+                            withContext(Dispatchers.Main){
+                                dismissLoadingDialog()
+                                collectAdapter.setNewData(ArrayList())
+                                mBinding.topTip.visibility = View.GONE
+                                showEmpty(EmptyCollectCallback::class.java)
+                            }
                         }
                     }
-                }.show()
+                }
+            )
         }
         collectAdapter.onItemLongClickListener =
             BaseQuickAdapter.OnItemLongClickListener { adapter: BaseQuickAdapter<*, *>?, view: View?, position: Int ->
@@ -97,7 +106,7 @@ class CollectActivity : BaseVbActivity<ActivityCollectBinding>() {
                     showSuccess()
                     mBinding.topTip.visibility = View.VISIBLE
                 }else{
-                    showEmpty()
+                    showEmpty(EmptyCollectCallback::class.java)
                 }
             }
         }

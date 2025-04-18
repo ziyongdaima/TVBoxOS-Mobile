@@ -31,7 +31,7 @@ import com.github.tvbox.osc.event.RefreshEvent
 import com.github.tvbox.osc.event.ServerEvent
 import com.github.tvbox.osc.ui.adapter.FastSearchAdapter
 import com.github.tvbox.osc.ui.dialog.DoubanSuggestDialog
-import com.github.tvbox.osc.ui.dialog.SearchCheckboxDialog
+import com.github.tvbox.osc.ui.dialog.SearchSourceDialog
 import com.github.tvbox.osc.ui.dialog.SearchSuggestionsDialog
 import com.github.tvbox.osc.util.FastClickCheckUtil
 import com.github.tvbox.osc.util.HawkConfig
@@ -138,10 +138,11 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
             } catch (th: Throwable) {
                 th.printStackTrace()
             }
-            // 跳转到搜索详情页面
+            // 直接跳转到详情页面
             val bundle = Bundle()
-            bundle.putString("title", video.name)
-            jumpActivity(SearchDetailActivity::class.java, bundle)
+            bundle.putString("id", video.id)
+            bundle.putString("sourceKey", video.sourceKey)
+            jumpActivity(DetailActivity::class.java, bundle)
         }
         mBinding.mGridViewFilter.setLayoutManager(LinearLayoutManager(this))
 
@@ -159,10 +160,11 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
                 } catch (th: Throwable) {
                     th.printStackTrace()
                 }
-                // 跳转到搜索详情页面
+                // 直接跳转到详情页面
                 val bundle = Bundle()
-                bundle.putString("title", video.name)
-                jumpActivity(SearchDetailActivity::class.java, bundle)
+                bundle.putString("id", video.id)
+                bundle.putString("sourceKey", video.sourceKey)
+                jumpActivity(DetailActivity::class.java, bundle)
             }
         }
 
@@ -192,8 +194,8 @@ class FastSearchActivity : BaseVbActivity<ActivityFastSearchBinding>(), TextWatc
                     searchAbleSource.add(sourceBean)
                 }
             }
-            val mSearchCheckboxDialog = SearchCheckboxDialog(this@FastSearchActivity, searchAbleSource, mCheckSources)
-            mSearchCheckboxDialog.show()
+            val mSearchSourceDialog = SearchSourceDialog(this@FastSearchActivity, searchAbleSource, mCheckSources)
+            mSearchSourceDialog.show()
         }
 
     }

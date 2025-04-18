@@ -69,6 +69,7 @@ import com.github.tvbox.osc.util.ScreenShotListenManager;
 import com.github.tvbox.osc.util.SearchHelper;
 import com.github.tvbox.osc.util.SubtitleHelper;
 import com.github.tvbox.osc.util.Utils;
+import com.github.tvbox.osc.util.MD3DialogUtils;
 import com.github.tvbox.osc.viewmodel.SourceViewModel;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -148,7 +149,7 @@ public class DetailActivity extends BaseVbActivity<ActivityDetailBinding> {
         registerReceiver(mBatteryReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         ImmersionBar.with(this)
                 .statusBarColor(R.color.black)
-                .navigationBarColor(R.color.white)
+                .navigationBarColor(R.color.md3_surface)
                 .fitsSystemWindows(true)
                 .statusBarDarkFont(false)
                 .init();
@@ -853,19 +854,19 @@ public class DetailActivity extends BaseVbActivity<ActivityDetailBinding> {
                 startActivity(intent); // 启动1DM App
             } else {
                 // 如果1DM App未安装，提示用户安装1DM App
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("请先安装1DM+下载管理器");
-                builder.setMessage("为了下载视频，请先安装1DM+下载管理器。是否现在安装？");
-                builder.setPositiveButton("立即下载", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
+                MD3DialogUtils.showAlertDialog(
+                    this,
+                    "请先安装1DM+下载管理器",
+                    "为了下载视频，请先安装1DM+下载管理器。是否现在安装？",
+                    "立即下载",
+                    "取消",
+                    (dialog, which) -> {
                         // 跳转到下载链接
                         Intent downloadIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://od.lk/d/MzRfMTg0NTcxMDdf/1DM _v15.6.apk"));
                         startActivity(downloadIntent);
-                    }
-                });
-                builder.setNegativeButton("取消", null);
-                builder.show();
+                    },
+                    null
+                );
             }
         } else {
             ToastUtils.showShort("资源异常,请稍后重试");

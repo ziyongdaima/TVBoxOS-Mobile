@@ -7,12 +7,12 @@
     app:hl_cornerRadius="@dimen/common_corners"
     app:hl_layoutBackground="@android:color/transparent"
     app:hl_strokeWith="0.6dp"
-    app:hl_strokeColor="@color/colorPrimary"
-    app:hl_layoutBackground_true="@color/colorPrimary"
+    app:hl_strokeColor="?attr/colorPrimary"
+    app:hl_layoutBackground_true="?attr/colorPrimaryContainer"
     app:hl_shapeMode="selected"
     app:hl_bindTextView="@+id/tvSeries"
-    app:hl_textColor_true="#fff"
-    app:hl_textColor="@color/colorPrimary">
+    app:hl_textColor_true="?attr/colorOnPrimaryContainer"
+    app:hl_textColor="?attr/colorPrimary">
 
     <TextView
         android:id="@+id/tvSeries"

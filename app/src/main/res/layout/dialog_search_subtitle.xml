@@ -88,14 +88,18 @@
             </ScrollView>
         </LinearLayout>
     </com.lihang.ShadowLayout>
-    <ProgressBar
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/loadingBar"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
-        android:indeterminateBehavior="repeat"
-        android:indeterminateDrawable="@drawable/anim_loading"
-        android:indeterminateOnly="true"
+        app:lottie_autoPlay="true"
+        android:scaleType="centerCrop"
+        app:lottie_fileName="md3_loading.json"
+        app:lottie_speed="1"
+        app:lottie_loop="true"
+        app:lottie_colorFilter="?attr/colorPrimary"
+        app:lottie_repeatMode="restart"
         android:visibility="gone"
         tools:visibility="visible"/>
 </FrameLayout>

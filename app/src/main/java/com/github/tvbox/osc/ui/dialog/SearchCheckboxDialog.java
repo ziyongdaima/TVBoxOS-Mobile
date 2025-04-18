@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+
 import com.blankj.utilcode.util.ScreenUtils;
 import com.github.tvbox.osc.R;
 import com.github.tvbox.osc.bean.SourceBean;
@@ -32,17 +34,17 @@ public class SearchCheckboxDialog extends BaseDialog{
     private RecyclerView mGridView;
     private CheckboxSearchAdapter checkboxSearchAdapter;
     private final List<SourceBean> mSourceList;
-    TextView checkAll;
-    TextView clearAll;
+    MaterialButton checkAll;
+    MaterialButton clearAll;
 
     public HashMap<String, String> mCheckSourcees;
 
     public SearchCheckboxDialog(@NonNull @NotNull Context context, List<SourceBean> sourceList, HashMap<String, String> checkedSources) {
-        super(context);
+        super(context, R.style.Widget_App_Dialog_M3);
         if (context instanceof Activity) {
             setOwnerActivity((Activity) context);
         }
-        
+
         setCancelable(true);
         mSourceList = sourceList;
         mCheckSourcees = checkedSources;
@@ -91,11 +93,15 @@ public class SearchCheckboxDialog extends BaseDialog{
                 }
             }
         }
-        final int scrollPosition = pos;
+        // 确保滚动位置有效
+        final int scrollPosition = (pos >= 0 && mSourceList != null && pos < mSourceList.size()) ? pos : 0;
         mGridView.post(new Runnable() {
             @Override
             public void run() {
-                mGridView.smoothScrollToPosition(scrollPosition);
+                // 再次检查适配器是否已经设置并且有数据
+                if (mGridView.getAdapter() != null && mGridView.getAdapter().getItemCount() > 0) {
+                    mGridView.smoothScrollToPosition(scrollPosition);
+                }
             }
         });
         checkAll.setOnClickListener(new View.OnClickListener() {
@@ -118,5 +124,8 @@ public class SearchCheckboxDialog extends BaseDialog{
                 checkboxSearchAdapter.setData(mSourceList, mCheckSourcees);
             }
         });
+
+        // 在复选框状态变化时自动保存选择结果
+        // 注意：在dismiss方法中已经调用了setMCheckedSources方法
     }
 }

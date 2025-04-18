@@ -5,8 +5,9 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
+import com.google.android.material.checkbox.MaterialCheckBox;
 
 
 import androidx.annotation.NonNull;
@@ -79,18 +80,18 @@ public class CheckboxSearchAdapter extends ListAdapter<SourceBean, CheckboxSearc
                 } else {
                     mCheckedSources.remove(sourceBean.getKey());
                 }
-                notifyItemChanged(pos);
+                // 自动保存选择结果
+                setMCheckedSources();
             }
         });
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public CheckBox oneSearchSource;
+        public MaterialCheckBox oneSearchSource;
 
         public ViewHolder(View view) {
             super(view);
-            oneSearchSource = (CheckBox) view.findViewById(R.id.oneSearchSource);
+            oneSearchSource = view.findViewById(R.id.oneSearchSource);
         }
     }
 

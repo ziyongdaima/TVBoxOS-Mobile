@@ -1,15 +1,12 @@
 package com.github.tvbox.osc.ui.dialog;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.ScreenUtils;
 import com.github.tvbox.osc.R;
-import com.github.tvbox.osc.databinding.DialogSubsTipBinding;
 import com.lxj.xpopup.core.BottomPopupView;
 
 /**
@@ -27,7 +24,7 @@ public class SubsTipDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_subs_tip;
+        return R.layout.dialog_subs_tip_m3;
     }
 
     @Override
@@ -38,8 +35,12 @@ public class SubsTipDialog extends BottomPopupView {
     @Override
     protected void onCreate() {
         super.onCreate();
-        DialogSubsTipBinding binding = DialogSubsTipBinding.bind(getPopupImplView());
-        binding.btnCancel.setOnClickListener(view -> {
+        View rootView = getPopupImplView();
+
+
+
+        // 设置知道了按钮点击事件
+        rootView.findViewById(R.id.btn_cancel).setOnClickListener(view -> {
             dismiss();
         });
     }

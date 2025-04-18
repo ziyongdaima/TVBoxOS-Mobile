@@ -32,7 +32,7 @@ public class GridFilterDialog extends BaseDialog {
 
     public GridFilterDialog(@NonNull @NotNull Context context) {
         super(context);
-        
+
         setCancelable(true);
         setContentView(R.layout.dialog_grid_filter);
         filterRoot = findViewById(R.id.filterRoot);
@@ -113,8 +113,18 @@ public class GridFilterDialog extends BaseDialog {
         layoutParams.gravity = Gravity.BOTTOM;
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        layoutParams.dimAmount = 0f;
+        layoutParams.dimAmount = 0.5f; // 设置背景遮罩透明度为0.5，符合Material Design 3规范
         getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setAttributes(layoutParams);
+
+        // 强制使用深色主题
+        int nightModeFlags = getContext().getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags != android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            // 如果不是深色模式，强制使用深色背景
+            ShadowLayout shadowLayout = (ShadowLayout) findViewById(R.id.filterRootContainer);
+            if (shadowLayout != null) {
+                shadowLayout.setLayoutBackground(getContext().getResources().getColor(R.color.color_232626));
+            }
+        }
     }
 }

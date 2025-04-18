@@ -6,14 +6,20 @@ import android.view.View
 import com.blankj.utilcode.util.ClipboardUtils
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.github.tvbox.osc.util.MD3ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.github.tvbox.osc.R
 import com.github.tvbox.osc.base.BaseVbActivity
 import com.github.tvbox.osc.bean.Source
 import com.github.tvbox.osc.bean.Subscription
+import com.github.tvbox.osc.callback.EmptySubscriptionCallback
 import com.github.tvbox.osc.databinding.ActivitySubscriptionBinding
+import com.github.tvbox.osc.ui.dialog.ConfirmDialog
+import com.github.tvbox.osc.ui.adapter.MenuAdapter
 import com.github.tvbox.osc.ui.adapter.SubscriptionAdapter
 import com.github.tvbox.osc.ui.dialog.ChooseSourceDialog
+import com.github.tvbox.osc.ui.dialog.MenuDialog
+import com.github.tvbox.osc.ui.dialog.RenameDialog
 import com.github.tvbox.osc.ui.dialog.SubsTipDialog
 import com.github.tvbox.osc.ui.dialog.SubsciptionDialog
 import com.github.tvbox.osc.ui.dialog.SubsciptionDialog.OnSubsciptionListener
@@ -41,6 +47,7 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
     private val mSources: MutableList<Source> = ArrayList()
 
     override fun init() {
+        setLoadSir(mBinding.rv, EmptySubscriptionCallback::class.java)
 
         mBinding.rv.setAdapter(mSubscriptionAdapter)
         mSubscriptions.forEach(Consumer { item: Subscription ->
@@ -50,13 +57,19 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
         })
 
         mSubscriptionAdapter.setNewData(mSubscriptions)
+
+        if (mSubscriptions.isEmpty()) {
+            showEmpty(EmptySubscriptionCallback::class.java)
+        } else {
+            showSuccess()
+        }
         mBinding.ivUseTip.setOnClickListener {
             XPopup.Builder(this)
                 .asCustom(SubsTipDialog(this))
                 .show()
         }
 
-        mBinding.titleBar.rightView.setOnClickListener {//添加订阅
+        mBinding.fabAdd.setOnClickListener {//添加订阅
             XPopup.Builder(this)
                 .autoFocusEditText(false)
                 .asCustom(
@@ -78,17 +91,7 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                                 addSubscription(name, url, checked)
                             }
 
-                            override fun chooseLocal(checked: Boolean) { //本地导入
-                                if (!XXPermissions.isGranted(
-                                        mContext,
-                                        Permission.MANAGE_EXTERNAL_STORAGE
-                                    )
-                                ) {
-                                    showPermissionTipPopup(checked)
-                                } else {
-                                    pickFile(checked)
-                                }
-                            }
+
                         })
                 ).show()
         }
@@ -97,15 +100,39 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
             LogUtils.d("删除订阅")
             if (view.id == R.id.iv_del) {
                 if (mSubscriptions.get(position).isChecked) {
-                    ToastUtils.showShort("不能删除当前使用的订阅")
+                    // 使用Material Design 3风格的对话框替代Toast提示
+                    XPopup.Builder(this@SubscriptionActivity)
+                        .isDarkTheme(Utils.isDarkTheme())
+                        .asCustom(ConfirmDialog(
+                            this@SubscriptionActivity,
+                            "提示",
+                            "不能删除当前使用的订阅",
+                            "",
+                            "确定",
+                            object : ConfirmDialog.OnDialogActionListener {
+                                override fun onConfirm() {
+                                    // 点击确定按钮关闭对话框
+                                }
+                            }
+                        )).show()
                     return@setOnItemChildClickListener
                 }
                 XPopup.Builder(this@SubscriptionActivity)
-                    .asConfirm("删除订阅", "确定删除订阅吗？") {
-                        mSubscriptions.removeAt(position)
-                        //删除/选择只刷新,不触发重新排序
-                        mSubscriptionAdapter.notifyDataSetChanged()
-                    }.show()
+                    .isDarkTheme(Utils.isDarkTheme())
+                    .asCustom(ConfirmDialog(
+                        this@SubscriptionActivity,
+                        "删除订阅",
+                        "确定删除订阅吗？",
+                        "取消",
+                        "确定",
+                        object : ConfirmDialog.OnDialogActionListener {
+                            override fun onConfirm() {
+                                mSubscriptions.removeAt(position)
+                                //删除/选择只刷新,不触发重新排序
+                                mSubscriptionAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    )).show()
             }
         }
 
@@ -126,112 +153,63 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
         mSubscriptionAdapter.onItemLongClickListener =
             BaseQuickAdapter.OnItemLongClickListener { adapter: BaseQuickAdapter<*, *>?, view: View, position: Int ->
                 val item = mSubscriptions[position]
+
+                // 创建菜单项列表
+                val menuItems = ArrayList<MenuAdapter.MenuItem>()
+                menuItems.add(
+                    MenuAdapter.MenuItem(
+                        if (item.isTop) "取消置顶" else "置顶",
+                        if (item.isTop) R.drawable.ic_unpin_m3 else R.drawable.ic_pin_m3
+                    )
+                )
+                menuItems.add(MenuAdapter.MenuItem("重命名", R.drawable.ic_edit_m3))
+                menuItems.add(MenuAdapter.MenuItem("复制地址", R.drawable.ic_content_copy_m3))
+
+                // 创建菜单对话框
+                val menuDialog = MenuDialog(this, menuItems)
+                menuDialog.setOnItemClickListener { index ->
+                    when (index) {
+                        0 -> {
+                            item.isTop = !item.isTop
+                            mSubscriptions[position] = item
+                            mSubscriptionAdapter.setNewData(mSubscriptions)
+                        }
+                        1 -> {
+                            XPopup.Builder(this)
+                                .asCustom(
+                                    RenameDialog(
+                                        this,
+                                        "更改为",
+                                        "新的订阅名",
+                                        item.name,
+                                        object : RenameDialog.OnRenameListener {
+                                            override fun onRename(text: String) {
+                                                item.name = text.trim()
+                                                mSubscriptionAdapter.notifyItemChanged(position)
+                                            }
+                                        }
+                                    )
+                                ).show()
+                        }
+                        2 -> {
+                            ClipboardUtils.copyText(mSubscriptions.get(position).url)
+                            MD3ToastUtils.showToast("已复制")
+                        }
+                    }
+                }
+
+                // 显示菜单
                 XPopup.Builder(this)
                     .atView(view.findViewById(R.id.tv_name))
                     .hasShadowBg(false)
-                    .asAttachList(
-                        arrayOf(
-                            if (item.isTop) "取消置顶" else "置顶",
-                            "重命名",
-                            "复制地址"
-                        ), null
-                    ) { index: Int, _: String? ->
-                        when (index) {
-                            0 -> {
-                                item.isTop = !item.isTop
-                                mSubscriptions[position] = item
-                                mSubscriptionAdapter.setNewData(mSubscriptions)
-                            }
-                            1 -> {
-                                XPopup.Builder(this)
-                                    .asInputConfirm(
-                                        "更改为",
-                                        "",
-                                        item.name,
-                                        "新的订阅名",
-                                        { text ->
-                                            if (!TextUtils.isEmpty(text)) {
-                                                if (text.trim { it <= ' ' }.length > 8) {
-                                                    ToastUtils.showShort("不要过长,不方便记忆")
-                                                } else {
-                                                    item.name = text.trim { it <= ' ' }
-                                                    mSubscriptionAdapter.notifyItemChanged(position)
-                                                }
-                                            }
-                                        },
-                                        null,
-                                        R.layout.dialog_input
-                                    ).show()
-                            }
-                            2 -> {
-                                ClipboardUtils.copyText(mSubscriptions.get(position).url)
-                                ToastUtils.showLong("已复制")
-                            }
-                        }
-                    }.show()
+                    .asCustom(menuDialog)
+                    .show()
+
                 true
             }
     }
 
-    private fun showPermissionTipPopup(checked: Boolean) {
-        XPopup.Builder(this@SubscriptionActivity)
-            .isDarkTheme(Utils.isDarkTheme())
-            .asConfirm("提示", "这将访问您设备文件的读取权限") {
-                XXPermissions.with(this)
-                    .permission(Permission.MANAGE_EXTERNAL_STORAGE)
-                    .request(object : OnPermissionCallback {
-                        override fun onGranted(permissions: List<String>, all: Boolean) {
-                            if (all) {
-                                pickFile(checked)
-                            } else {
-                                ToastUtils.showLong("部分权限未正常授予,请授权")
-                            }
-                        }
 
-                        override fun onDenied(permissions: List<String>, never: Boolean) {
-                            if (never) {
-                                ToastUtils.showLong("读写文件权限被永久拒绝，请手动授权")
-                                // 如果是被永久拒绝就跳转到应用权限系统设置页面
-                                XXPermissions.startPermissionActivity(
-                                    this@SubscriptionActivity,
-                                    permissions
-                                )
-                            } else {
-                                ToastUtils.showShort("获取权限失败")
-                                showPermissionTipPopup(checked)
-                            }
-                        }
-                    })
-            }.show()
-    }
-
-    /**
-     *
-     * @param checked 与showPermissionTipPopup一样,只记录并传递选中状态
-     */
-    private fun pickFile(checked: Boolean) {
-        ChooserDialog(this@SubscriptionActivity, R.style.FileChooser)
-            .withFilter(false, false, "txt", "json")
-            .withStartFile(
-                if (TextUtils.isEmpty(Hawk.get("before_selected_path"))) "/storage/emulated/0/Download" else Hawk.get(
-                    "before_selected_path"
-                )
-            )
-            .withChosenListener(ChooserDialog.Result { _, pathFile ->
-                Hawk.put("before_selected_path", pathFile.parent)
-                val clanPath =
-                    pathFile.absolutePath.replace("/storage/emulated/0", "clan://localhost")
-                for (item in mSubscriptions) {
-                    if (item.url == clanPath) {
-                        ToastUtils.showLong("订阅地址与" + item.name + "相同")
-                        return@Result
-                    }
-                }
-                addSubscription(pathFile.name, clanPath, checked)
-            })
-            .build()
-            .show()
-    }
 
     private fun addSubscription(name: String, url: String, checked: Boolean) {
         if (url.startsWith("clan://")) {

@@ -1058,6 +1058,10 @@ public class PlayFragment extends BaseLazyFragment {
         mVodInfo = App.getInstance().getVodInfo();
         sourceKey = bundle.getString("sourceKey");
         sourceBean = ApiConfig.get().getSource(sourceKey);
+        if (sourceBean == null) {
+            ToastUtils.showShort("数据源不存在");
+            return;
+        }
         initPlayerCfg();
         play(false);
     }
@@ -1641,7 +1645,7 @@ public class PlayFragment extends BaseLazyFragment {
             if (url.contains("url=http") || url.contains(".html")) {
                 return false;
             }
-            if (sourceBean.getType() == 3) {
+            if (sourceBean != null && sourceBean.getType() == 3) {
                 Spider sp = ApiConfig.get().getCSP(sourceBean);
                 if (sp != null && sp.manualVideoCheck()) {
                     return sp.isVideoFormat(url);

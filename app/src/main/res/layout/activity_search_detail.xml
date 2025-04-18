@@ -18,9 +18,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bar_arrows_left_black"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="2dp"
+            android:src="@drawable/ic_arrow_back_m3"
+            app:tint="?attr/colorOnSurface"/>
 
         <TextView
             android:id="@+id/tv_title"
@@ -37,7 +39,7 @@
             android:id="@+id/iv_search"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_search_48"
+            android:src="@drawable/ic_search_m3"
             android:paddingHorizontal="6dp"
             app:tint="@color/text_foreground"/>
     </LinearLayout>
@@ -53,7 +55,8 @@
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:background="#33FFFFFF"
-            android:paddingVertical="5dp"
+            android:paddingVertical="2dp"
+            android:clipToPadding="false"
             tools:listitem="@layout/item_search_category"/>
 
         <!-- 右侧内容区域 -->

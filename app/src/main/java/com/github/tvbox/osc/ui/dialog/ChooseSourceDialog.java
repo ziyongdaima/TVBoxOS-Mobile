@@ -36,13 +36,17 @@ public class ChooseSourceDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_sources;
+        return R.layout.dialog_sources_m3;
     }
 
     @Override
     protected void onCreate() {
         super.onCreate();
         RecyclerView rv = findViewById(R.id.rv);
+
+        // 设置关闭按钮点击事件
+        findViewById(R.id.iv_close).setOnClickListener(v -> dismiss());
+
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         SourceAdapter sourceAdapter = new SourceAdapter();
         rv.setAdapter(sourceAdapter);

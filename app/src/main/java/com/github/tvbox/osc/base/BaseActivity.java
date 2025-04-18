@@ -82,7 +82,7 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
         ImmersionBar.with(this)
                 .statusBarDarkFont(!Utils.isDarkTheme())
                 .titleBar(findTitleBar(getWindow().getDecorView().findViewById(android.R.id.content)))
-                .navigationBarColor(R.color.white)
+                .navigationBarColor(R.color.md3_surface)
                 .init();
     }
 
@@ -146,6 +146,16 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
         }
     }
 
+    protected void setLoadSir(View view, Class<? extends Callback> emptyCallback) {
+        if (mLoadService == null) {
+            mLoadService = LoadSir.getDefault().register(view, new Callback.OnReloadListener() {
+                @Override
+                public void onReload(View v) {
+                }
+            });
+        }
+    }
+
     protected void showLoading() {
         if (mLoadService != null) {
             mLoadService.showCallback(LoadingCallback.class);
@@ -155,6 +165,12 @@ public abstract class BaseActivity extends AppCompatActivity implements CustomAd
     protected void showEmpty() {
         if (null != mLoadService) {
             mLoadService.showCallback(EmptyCallback.class);
+        }
+    }
+
+    protected void showEmpty(Class<? extends Callback> emptyCallback) {
+        if (null != mLoadService) {
+            mLoadService.showCallback(emptyCallback);
         }
     }
 
