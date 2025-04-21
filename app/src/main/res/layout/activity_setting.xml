@@ -13,7 +13,6 @@
         app:title="设置"
         app:titleStyle="bold"
         android:background="?attr/colorSurface"
-        app:leftIcon="@drawable/ic_arrow_back_m3"
         app:titleColor="?attr/colorOnSurface"
         app:rightTitleColor="?attr/colorOnSurface"
         app:leftTitleColor="?attr/colorOnSurface"
@@ -70,13 +69,12 @@
 
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
 
@@ -110,13 +108,12 @@
 
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -148,13 +145,12 @@
                         android:layout_height="wrap_content"
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
 
@@ -231,13 +227,12 @@
                             android:layout_height="wrap_content"
                             />
 
-                        <ImageView
+                        <TextView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            android:alpha="0.75"
-                            android:src="@drawable/ic_chevron_right_m3"
-                            app:tint="?attr/colorOnSurfaceVariant"/>
+                            android:text="@string/ms_arrow_forward"
+                            style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                     </LinearLayout>
 
                     <TextView
@@ -309,13 +304,12 @@
 
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -347,13 +341,12 @@
                         android:layout_height="wrap_content"
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -390,13 +383,12 @@
                             android:layout_height="wrap_content"
                             />
 
-                        <ImageView
+                        <TextView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            android:alpha="0.75"
-                            android:src="@drawable/ic_chevron_right_m3"
-                            app:tint="?attr/colorOnSurfaceVariant"/>
+                            android:text="@string/ms_arrow_forward"
+                            style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                     </LinearLayout>
 
                     <TextView
@@ -444,13 +436,12 @@
                             android:layout_height="wrap_content"
                             />
 
-                        <ImageView
+                        <TextView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            android:alpha="0.75"
-                            android:src="@drawable/ic_chevron_right_m3"
-                            app:tint="?attr/colorOnSurfaceVariant"/>
+                            android:text="@string/ms_arrow_forward"
+                            style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                     </LinearLayout>
 
                     <TextView
@@ -492,13 +483,12 @@
 
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -562,13 +552,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
 
@@ -606,13 +595,12 @@
                             android:layout_height="wrap_content"
                             />
 
-                        <ImageView
+                        <TextView
                             android:layout_width="26dp"
                             android:layout_height="26dp"
                             android:layout_gravity="center"
-                            android:alpha="0.75"
-                            android:src="@drawable/ic_chevron_right_m3"
-                            app:tint="?attr/colorOnSurfaceVariant"/>
+                            android:text="@string/ms_arrow_forward"
+                            style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                     </LinearLayout>
 
                     <TextView
@@ -653,13 +641,12 @@
 
                         />
 
-                    <ImageView
+                    <TextView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:layout_gravity="center"
-                        android:alpha="0.75"
-                        android:src="@drawable/ic_chevron_right_m3"
-                        app:tint="?attr/colorOnSurfaceVariant"/>
+                        android:text="@string/ms_arrow_forward"
+                        style="@style/Widget.App.MaterialSymbols.Setting.Arrow"/>
                 </LinearLayout>
 
 

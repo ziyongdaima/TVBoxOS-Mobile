@@ -22,6 +22,8 @@ import com.github.tvbox.osc.util.FastClickCheckUtil
 import com.github.tvbox.osc.util.FileUtils
 import com.github.tvbox.osc.util.HawkConfig
 import com.github.tvbox.osc.util.HistoryHelper
+import com.github.tvbox.osc.util.MaterialSymbols
+import com.github.tvbox.osc.util.MaterialSymbolsLoader
 import com.github.tvbox.osc.util.OkGoHelper
 import com.github.tvbox.osc.util.PlayerHelper
 import com.github.tvbox.osc.util.Utils
@@ -45,7 +47,11 @@ class SettingActivity : BaseVbActivity<ActivitySettingBinding>() {
     private var dnsOpt = Hawk.get(HawkConfig.DOH_URL, 0)
 
     override fun init() {
-
+        // 设置返回图标
+        val backIcon = android.widget.TextView(this)
+        backIcon.text = MaterialSymbols.ARROW_BACK
+        backIcon.setTextAppearance(R.style.Widget_App_MaterialSymbols_Setting_Back)
+        mBinding.titleBar.leftView = backIcon
         mBinding.titleBar.leftView.setOnClickListener { onBackPressed() }
         mBinding.tvMediaCodec.text = Hawk.get(HawkConfig.IJK_CODEC, "")
 
