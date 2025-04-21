@@ -4,26 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:hl_cornerRadius="@dimen/common_corners"
-    app:hl_layoutBackground="@android:color/transparent"
-    app:hl_strokeWith="0.6dp"
-    app:hl_strokeColor="?attr/colorPrimary"
-    app:hl_layoutBackground_true="?attr/colorPrimaryContainer"
+    app:hl_cornerRadius="8dp"
+    app:hl_layoutBackground="#232626"
+    app:hl_strokeWith="0.5dp"
+    app:hl_strokeColor="#33FFFFFF"
+    app:hl_layoutBackground_true="?attr/colorPrimary"
     app:hl_shapeMode="selected"
     app:hl_bindTextView="@+id/tvSeries"
-    app:hl_textColor_true="?attr/colorOnPrimaryContainer"
-    app:hl_textColor="?attr/colorPrimary">
+    app:hl_textColor_true="?attr/colorOnPrimary"
+    app:hl_textColor="?attr/colorOnSurfaceVariant">
 
     <TextView
         android:id="@+id/tvSeries"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:ellipsize="marquee"
+        android:ellipsize="end"
         android:gravity="center"
-        android:marqueeRepeatLimit="marquee_forever"
         android:text="第210集"
         android:singleLine="true"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="6dp"
-        android:textSize="12dp"/>
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="12dp"
+        android:textSize="16sp"/>
 </com.lihang.ShadowLayout>

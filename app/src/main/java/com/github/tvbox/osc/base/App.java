@@ -20,6 +20,7 @@ import com.github.tvbox.osc.util.EpgUtil;
 import com.github.tvbox.osc.util.FileUtils;
 import com.github.tvbox.osc.util.HawkConfig;
 import com.github.tvbox.osc.util.LOG;
+import com.github.tvbox.osc.util.MaterialSymbolsLoader;
 import com.github.tvbox.osc.util.OkGoHelper;
 import com.github.tvbox.osc.util.PlayerHelper;
 import com.github.tvbox.osc.util.Utils;
@@ -79,6 +80,8 @@ public class App extends MultiDexApplication {
         FileUtils.cleanPlayerCache();
         initCrashConfig();
         Utils.initTheme();
+        // 初始Material Symbols字体
+        MaterialSymbolsLoader.init(this);
     }
 
     private void initParams() {

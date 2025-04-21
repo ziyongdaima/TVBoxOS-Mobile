@@ -239,12 +239,12 @@ public class VodController extends BaseController {
         mLockView.setOnClickListener(v -> {
             isLock = !isLock;
             if (isLock){// 上了锁
-                mLockView.setImageResource(R.drawable.ic_lock);
+                mLockView.setImageResource(R.drawable.ic_lock_m3);
                 hideBottom();
                 mHandler.removeCallbacks(lockRunnable);
                 mHandler.postDelayed(lockRunnable,dismissTimeLock);
             }else {// 解了锁
-                mLockView.setImageResource(R.drawable.ic_unlock);
+                mLockView.setImageResource(R.drawable.ic_unlock_m3);
                 showBottom();
                 myHandle.removeCallbacks(myRunnable);
                 myHandle.postDelayed(myRunnable, dismissTimeOperationBar);
@@ -889,10 +889,10 @@ public class VodController extends BaseController {
             case VideoView.STATE_PLAYING:
                 initLandscapePortraitBtnInfo();
                 startProgress();
-                mIvPlayStatus.setImageResource(R.drawable.ic_pause);
+                mIvPlayStatus.setImageResource(R.drawable.ic_pause_m3);
                 break;
             case VideoView.STATE_PAUSED:
-                mIvPlayStatus.setImageResource(R.drawable.ic_play);
+                mIvPlayStatus.setImageResource(R.drawable.ic_play_status_m3);
                 break;
             case VideoView.STATE_ERROR:
                 listener.errReplay();

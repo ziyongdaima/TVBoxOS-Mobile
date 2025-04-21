@@ -128,6 +128,8 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                         object : ConfirmDialog.OnDialogActionListener {
                             override fun onConfirm() {
                                 mSubscriptions.removeAt(position)
+                                //删除后立即保存数据
+                                saveSubscriptions()
                                 //删除/选择只刷新,不触发重新排序
                                 mSubscriptionAdapter.notifyDataSetChanged()
                             }
@@ -146,6 +148,8 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                     subscription.setChecked(false)
                 }
             }
+            //保存选择状态
+            saveSubscriptions()
             //删除/选择只刷新,不触发重新排序
             mSubscriptionAdapter.notifyDataSetChanged()
         }
@@ -172,6 +176,7 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                         0 -> {
                             item.isTop = !item.isTop
                             mSubscriptions[position] = item
+                            saveSubscriptions()
                             mSubscriptionAdapter.setNewData(mSubscriptions)
                         }
                         1 -> {
@@ -185,6 +190,7 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                                         object : RenameDialog.OnRenameListener {
                                             override fun onRename(text: String) {
                                                 item.name = text.trim()
+                                                saveSubscriptions()
                                                 mSubscriptionAdapter.notifyItemChanged(position)
                                             }
                                         }
@@ -213,8 +219,8 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
 
     private fun addSubscription(name: String, url: String, checked: Boolean) {
         if (url.startsWith("clan://")) {
+            // 本地订阅直接添加
             addSub2List(name, url, checked)
-            mSubscriptionAdapter.setNewData(mSubscriptions)
         } else if (url.startsWith("http")) {
             showLoadingDialog()
             OkGo.get<String>(url)
@@ -244,6 +250,15 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                                         val url = obj["url"].asString.trim { it <= ' ' }
                                         mSubscriptions.add(Subscription(name, url))
                                     }
+                                    // 立即保存数据并刷新UI
+                                    saveSubscriptions()
+                                    mSubscriptionAdapter.setNewData(mSubscriptions)
+                                    // 确保显示内容
+                                    if (mSubscriptions.isNotEmpty()) {
+                                        showSuccess()
+                                    }
+                                    // 提示用户
+                                    MD3ToastUtils.showToast("添加多线路订阅成功")
                                 }
                             } else if (storeHouse != null && storeHouse.isJsonArray) { // 多仓
                                 val storeHouseList = storeHouse.asJsonArray
@@ -276,11 +291,15 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
                                 }
                             } else { // 单线路/其余
                                 addSub2List(name, url, checked)
+                                // 提示用户
+                                MD3ToastUtils.showToast("添加订阅成功")
                             }
                         } catch (th: Throwable) {
+                            // 异常情况下作为单线路处理
                             addSub2List(name, url, checked)
+                            // 提示用户
+                            MD3ToastUtils.showToast("添加订阅成功")
                         }
-                        mSubscriptionAdapter.setNewData(mSubscriptions)
                     }
 
                     @Throws(Throwable::class)
@@ -317,13 +336,31 @@ class SubscriptionActivity : BaseVbActivity<ActivitySubscriptionBinding>() {
         } else {
             mSubscriptions.add(Subscription(name, url).setChecked(false))
         }
+
+        // 立即保存订阅数据到Hawk
+        saveSubscriptions()
+
+        // 刷新UI显示
+        mSubscriptionAdapter.setNewData(mSubscriptions)
+
+        // 确保列表不为空时显示内容
+        if (mSubscriptions.isNotEmpty()) {
+            showSuccess()
+        }
+    }
+
+    /**
+     * 保存订阅数据到Hawk
+     */
+    private fun saveSubscriptions() {
+        Hawk.put(HawkConfig.API_URL, mSelectedUrl)
+        Hawk.put<List<Subscription>?>(HawkConfig.SUBSCRIPTIONS, mSubscriptions)
     }
 
     override fun onPause() {
         super.onPause()
         // 更新缓存
-        Hawk.put(HawkConfig.API_URL, mSelectedUrl)
-        Hawk.put<List<Subscription>?>(HawkConfig.SUBSCRIPTIONS, mSubscriptions)
+        saveSubscriptions()
     }
 
     override fun finish() {

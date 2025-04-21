@@ -40,91 +40,42 @@
 
                     <TextView
                         android:id="@+id/speed0"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_button_m3"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x0.5" />
 
                     <TextView
                         android:id="@+id/speed1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x1.0" />
 
                     <TextView
                         android:id="@+id/speed1a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x1.25" />
 
                     <TextView
                         android:id="@+id/speed2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:singleLine="true"
-                        android:text="x1.5"
-                        android:textColor="@color/text_foreground" />
+                        android:text="x1.5" />
 
                     <TextView
                         android:id="@+id/speed3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x2.0" />
                     <TextView
                         android:id="@+id/speed4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x2.5" />
                     <TextView
                         android:id="@+id/speed5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/Widget.App.Button.PlayControl"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/bg_r_common_stroke_primary"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:textColor="@color/text_foreground"
-                        android:paddingVertical="4dp"
-                        android:paddingHorizontal="10dp"
                         android:text="x3.0" />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -142,15 +93,8 @@
 
             <TextView
                 android:id="@+id/scale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_r_common_stroke_primary"
-                android:gravity="center"
-                android:singleLine="true"
-                android:textColor="@color/text_foreground"
-                android:paddingVertical="4dp"
-                android:paddingHorizontal="10dp"
-                android:drawableRight="@drawable/ic_change_20"
+                style="@style/Widget.App.Button.PlayControl"
+                android:drawableEnd="@drawable/ic_change_20"
                 android:drawablePadding="8dp"
                 tools:text="16:9"
                 />
@@ -181,15 +125,8 @@
                     />
                 <TextView
                     android:id="@+id/play_time_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginHorizontal="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     tools:text="片头" />
                 <ImageView
                     android:id="@+id/increase_start"
@@ -209,15 +146,8 @@
                     />
                 <TextView
                     android:id="@+id/play_time_end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginHorizontal="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     tools:text="片尾" />
                 <ImageView
                     android:id="@+id/increase_end"
@@ -229,15 +159,7 @@
 
                 <TextView
                     android:id="@+id/start_end_reset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginStart="10dp"
                     android:text="重置" />
             </LinearLayout>
@@ -260,31 +182,17 @@
 
                 <TextView
                     android:id="@+id/player"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
-                    android:drawableRight="@drawable/ic_change_20"
+                    android:drawableEnd="@drawable/ic_change_20"
                     android:drawablePadding="8dp"
                     tools:text="EXO" />
 
                 <TextView
                     android:id="@+id/decode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
-                    android:drawableRight="@drawable/ic_change_20"
+                    android:drawableEnd="@drawable/ic_change_20"
                     android:drawablePadding="8dp"
                     tools:text="硬解" />
 
@@ -308,15 +216,8 @@
                 android:layout_marginBottom="20dp">
                 <TextView
                     android:id="@+id/landscape_portrait"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="横竖屏"
                     android:visibility="gone"
                     tools:visibility="visible"
@@ -324,68 +225,33 @@
 
                 <TextView
                     android:id="@+id/subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="字幕" />
 
                 <TextView
                     android:id="@+id/voice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="音轨" />
 
 
                 <TextView
                     android:id="@+id/replay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="重播" />
 
                 <TextView
                     android:id="@+id/refresh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="刷新" />
 
                 <TextView
                     android:id="@+id/download"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/Widget.App.Button.PlayControl"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/bg_r_common_stroke_primary"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:textColor="@color/text_foreground"
-                    android:paddingVertical="4dp"
-                    android:paddingHorizontal="10dp"
                     android:text="下载"
                     android:visibility="gone"
                     tools:visibility="visible"/>

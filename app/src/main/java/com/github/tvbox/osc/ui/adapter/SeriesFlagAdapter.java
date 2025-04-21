@@ -23,11 +23,27 @@ public class SeriesFlagAdapter extends BaseQuickAdapter<VodInfo.VodSeriesFlag, B
     @Override
     protected void convert(BaseViewHolder helper, VodInfo.VodSeriesFlag item) {
         View select = helper.getView(R.id.vFlag);
+        TextView tvFlag = helper.getView(R.id.tvFlag);
+        com.lihang.ShadowLayout shadowLayout = (com.lihang.ShadowLayout) helper.itemView;
+
+        // 清理线路名称中的表情符号
+        String flagName = item.name;
+        flagName = flagName.replaceAll("[\\uD83C-\\uDBFF\\uDC00-\\uDFFF]+", "").trim(); // 移除表情符号
+
         if (item.selected) {
             select.setVisibility(View.VISIBLE);
+            tvFlag.setTextColor(helper.itemView.getContext().getResources().getColor(com.google.android.material.R.color.material_dynamic_primary60));
+            shadowLayout.setSelected(true);
         } else {
             select.setVisibility(View.GONE);
+            tvFlag.setTextColor(helper.itemView.getContext().getResources().getColor(com.google.android.material.R.color.material_dynamic_secondary60));
+            shadowLayout.setSelected(false);
         }
-        helper.setText(R.id.tvFlag, item.name);
+
+        helper.setText(R.id.tvFlag, flagName);
+
+        // 确保整个项目可点击
+        helper.itemView.setClickable(true);
+        helper.itemView.setFocusable(true);
     }
 }

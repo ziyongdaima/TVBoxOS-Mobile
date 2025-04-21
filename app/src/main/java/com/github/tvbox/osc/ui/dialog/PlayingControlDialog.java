@@ -32,7 +32,7 @@ public class PlayingControlDialog extends BottomPopupView {
 
     @Override
     protected int getImplLayoutId() {
-        return R.layout.dialog_playing_control;
+        return R.layout.dialog_playing_control_new;
     }
 
     @Override

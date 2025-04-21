@@ -219,21 +219,20 @@
         <item name="itemPaddingBottom">16dp</item>
         <item name="android:background">?attr/colorSurface</item>
         <item name="itemActiveIndicatorStyle">@style/Widget.App.BottomNavigation.ActiveIndicator</item>
-        <item name="itemRippleColor">?attr/colorPrimaryContainer</item>
+        <item name="itemRippleColor">#33006A6A</item>
     </style>
 
     <!-- Material Design 3 标签栏样式 -->
     <style name="Widget.App.TabLayout" parent="Widget.Material3.TabLayout">
-        <item name="android:background">?attr/colorSurfaceContainer</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="tabIndicatorColor">?attr/colorPrimary</item>
         <item name="tabSelectedTextColor">?attr/colorPrimary</item>
         <item name="tabTextColor">?attr/colorOnSurfaceVariant</item>
         <item name="tabIndicatorHeight">3dp</item>
         <item name="tabIndicatorFullWidth">false</item>
-        <item name="tabIndicatorRadius">1.5dp</item>
         <item name="tabPaddingStart">16dp</item>
         <item name="tabPaddingEnd">16dp</item>
-        <item name="tabRippleColor">?attr/colorPrimaryContainer</item>
+        <item name="tabRippleColor">@android:color/transparent</item>
     </style>
 
     <!-- 带有深灰色描边的文本按钮样式 -->
@@ -282,5 +281,63 @@
     <!-- 详细错误信息弹窗按钮样式 -->
     <style name="Widget.App.Button.Dialog.ErrorDetail" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:textColor">@color/color_FFFFFF</item>
+    </style>
+
+    <!-- 播放控制按钮样式 -->
+    <style name="Widget.App.Button.PlayControl" parent="Widget.Material3.Button.TextButton">
+        <item name="android:background">@drawable/bg_button_m3</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:paddingHorizontal">12dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- 倒序和全部按钮样式 -->
+    <style name="Widget.App.Button.SortAndAll" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:background">@drawable/bg_button_sort_all_m3</item>
+        <item name="android:textColor">#D2D4D4</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">100dp</item>
+        <item name="android:drawablePadding">12dp</item>
+    </style>
+    <!-- Material Symbols 图标字体样式 -->
+    <style name="Widget.App.MaterialSymbols" parent="">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:gravity">center</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Material Symbols 图标字体样式 - 小尺寸 -->
+    <style name="Widget.App.MaterialSymbols.Small" parent="Widget.App.MaterialSymbols">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Material Symbols 图标字体样式 - 大尺寸 -->
+    <style name="Widget.App.MaterialSymbols.Large" parent="Widget.App.MaterialSymbols">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <!-- Material Symbols 图标字体样式 - 主题色 -->
+    <style name="Widget.App.MaterialSymbols.Primary" parent="Widget.App.MaterialSymbols">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <!-- Material Symbols 图标字体样式 - 设置页面箭头 -->
+    <style name="Widget.App.MaterialSymbols.Setting.Arrow" parent="Widget.App.MaterialSymbols">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:alpha">0.75</item>
+    </style>
+
+    <!-- Material Symbols 图标字体样式 - 设置页面返回按钮 -->
+    <style name="Widget.App.MaterialSymbols.Setting.Back" parent="Widget.App.MaterialSymbols">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 </resources>

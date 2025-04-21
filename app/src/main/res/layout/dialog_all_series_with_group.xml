@@ -36,10 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="倒序"
-            android:drawableRight="@drawable/ic_sort_18"
-            android:textColor="@color/text_foreground"
-            android:drawablePadding="4dp"
-            android:paddingVertical="6dp"
+            android:drawableRight="@drawable/ic_swap_vert_m3_24_new"
+            style="@style/Widget.App.Button.SortAndAll"
             android:layout_marginRight="20dp"
             />
     </LinearLayout>

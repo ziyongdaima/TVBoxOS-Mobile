@@ -2,6 +2,7 @@
 <resources>
     <attr name="fontPath" format="string" />
     <attr name="textFieldStyle" format="reference" />
+    <attr name="tabIndicatorRadius" format="dimension" />
     <declare-styleable name="lbBaseGridView">
         <attr name="focusOutFront" format="boolean" />
         <attr name="focusOutEnd" format="boolean" />

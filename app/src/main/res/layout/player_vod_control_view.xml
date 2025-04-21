@@ -59,7 +59,7 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingHorizontal="6dp"
-        android:src="@drawable/ic_unlock"
+        android:src="@drawable/ic_unlock_m3"
         android:visibility="invisible"
         tools:visibility="visible"/>
 
@@ -119,37 +119,36 @@
             android:layout_height="wrap_content"
             android:gravity="end">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/pip"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
                 android:padding="3dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_pip"
-                app:tint="@color/white" />
+                android:src="@drawable/picture_in_picture_alt_20px"
+                android:tint="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/cast"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
                 android:padding="4dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_cast"
+                android:src="@drawable/cast_20"
                 android:layout_marginStart="4dp"
-                app:tint="@color/white" />
+                android:tint="@color/white" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <ImageView
                 android:id="@+id/setting"
-                android:layout_width="34dp"
-                android:layout_height="34dp"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:scaleType="centerCrop"
                 android:padding="4dp"
-                android:src="@drawable/ic_player_setting"
+                android:src="@drawable/ic_player_setting_m3"
                 android:tint="@color/white"
-                android:layout_marginStart="4dp"
-                />
+                android:layout_marginStart="4dp" />
 
         </LinearLayout>
 
@@ -228,7 +227,7 @@
                 android:layout_height="34dp"
                 android:scaleType="centerCrop"
                 android:padding="4dp"
-                android:src="@drawable/ic_pause"/>
+                android:src="@drawable/ic_pause_m3"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/play_pre"
@@ -314,7 +313,7 @@
                 android:layout_height="34dp"
                 android:scaleType="centerCrop"
                 android:padding="4dp"
-                android:src="@drawable/ic_fullscreen"/>
+                android:src="@drawable/ic_fullscreen_m3"/>
         </LinearLayout>
 
             <HorizontalScrollView

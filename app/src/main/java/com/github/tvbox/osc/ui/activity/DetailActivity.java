@@ -226,6 +226,7 @@ public class DetailActivity extends BaseVbActivity<ActivityDetailBinding> {
         });
 
         seriesFlagAdapter.setOnItemClickListener((adapter, view, position) -> {
+            FastClickCheckUtil.check(view);
             chooseFlag(position);
         });
 
